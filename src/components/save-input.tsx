@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
-export default function SaveInput({ setSavedata }: { setSavedata: React.Dispatch<XMLDocument> }) {
-  const [filename, setFilename] = useState<string>();
+export default function SaveInput({ filename, setFilename, setSavedata }: { filename: string, setFilename:React.Dispatch<string>, setSavedata: React.Dispatch<XMLDocument> }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInput = (files : FileList | null) => {
@@ -9,18 +8,19 @@ export default function SaveInput({ setSavedata }: { setSavedata: React.Dispatch
     if (files.length === 0) return;
     const savefile = files[0];
     setFilename(savefile.name);
-    readSavefile(savefile);
+    getSavedata(savefile, (savedata: XMLDocument) => {
+      setSavedata(savedata)
+    });
   }
 
-  const readSavefile = (savefile : File) => {
+  const getSavedata = (savefile : File, callback: Function) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
       const parser = new DOMParser();
-      const result = reader.result as string;
-      const savedata = parser.parseFromString(result, 'text/xml') as XMLDocument;
-      setSavedata(savedata);
+      const savedataAsString = reader.result as string;
+      const savedata = parser.parseFromString(savedataAsString, 'text/xml') as XMLDocument;
+      callback(savedata);
     })
-    console.log(savefile);
     reader.readAsText(savefile);
   }
 

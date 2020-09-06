@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import SaveInput from './save-input';
-import AchievementList from './achievement-list';
+import Editor from './editor';
+import SaveDownload from './save-download';
 
 export default function Controller() {
+  const [filename, setFilename] = useState<string>("");
   const [savedata, setSavedata] = useState<XMLDocument>();
 
-  console.log(savedata);
   return (
     <>
-      <SaveInput setSavedata={setSavedata} />
-      {savedata && <AchievementList savedata={savedata} setSavedata={setSavedata} />}
+      <SaveInput filename={filename} setFilename={setFilename} setSavedata={setSavedata} />
+      {(savedata && filename) && <SaveDownload filename={filename} savedata={savedata} />}
+      {savedata && <Editor savedata={savedata} setSavedata={setSavedata} />}
     </>
   );
 }
