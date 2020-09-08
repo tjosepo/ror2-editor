@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Challenge, challenges } from '../challenges';
+import ChallengeBox from './challenge-box';
 
 export default function Editor({savedata, setSavedata }: {savedata: XMLDocument, setSavedata: React.Dispatch<XMLDocument> }) {
   const coins = savedata.querySelector('coins')!.innerHTML;
@@ -192,17 +193,15 @@ export default function Editor({savedata, setSavedata }: {savedata: XMLDocument,
       </div>
     </div>
 
-    <ul>
+    <div style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridGap: 12}}>
       {challenges.map((challenge) =>
-        <li key={challenge.unlock}>
-          {challenge.name} 
-          <input
-            type="checkbox"
-            checked={achievements.includes(challenge.achievement)}
-            onChange={(e) => changeChallenge(challenge, e.target.checked)} />
-        </li>
+        <ChallengeBox 
+          challenge={challenge}
+          selected={achievements.includes(challenge.achievement)} 
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeChallenge(challenge, e.target.checked)} 
+        />
       )}
-    </ul>
+    </div>
 
     </div>
   );

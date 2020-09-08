@@ -1,0 +1,30 @@
+.grid {
+  display: grid;
+  grid-template-columns: 84px 1fr 30px;
+  background-color: #28333D;
+  border: 2px solid #33404D;
+  align-items: center;
+
+  .icon {
+    margin: -2px;
+  }
+
+  .text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px 5px;
+
+    .name {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .desc {
+      color: #E3E9EB;
+      margin: 0;
+    }
+  }
+}
