@@ -1,12 +1,14 @@
 import React from 'react';
 import { Challenge } from '../challenges';
-import Checkbox from './checkbox';
 import './challenge-box.scss';
 
-export default function ChallengeBox({ challenge, selected, onChange }: { challenge: Challenge,selected: boolean, onChange: Function }) {
+export default function ChallengeBox({ challenge, selected, onClick }: { challenge: Challenge, selected: boolean, onClick: Function }) {
 
   return (
-    <div className="grid">
+    <button
+      type="button"
+      className={`grid ${selected ? "selected" : ""}`}
+      onClick={(e) => onClick(!selected)}>
       <div className="icon">
         <img src={challenge.icon} alt={`${challenge.name} description`} />
       </div>
@@ -14,10 +16,6 @@ export default function ChallengeBox({ challenge, selected, onChange }: { challe
         <p className="name">{challenge.name}</p>
         <p className="desc">{challenge.description}</p>
       </div>
-      <Checkbox
-        checked={selected}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
-      />
-    </div>
+    </button>
   );
 }

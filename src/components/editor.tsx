@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Challenge, challenges } from '../challenges';
 import ChallengeBox from './challenge-box';
 
-export default function Editor({savedata, setSavedata }: {savedata: XMLDocument, setSavedata: React.Dispatch<XMLDocument> }) {
+export default function Editor({ savedata, setSavedata }: { savedata: XMLDocument, setSavedata: React.Dispatch<XMLDocument> }) {
   const coins = savedata.querySelector('coins')!.innerHTML;
   const stats = savedata.querySelector('stats')!;
-  let [achievements, setAchievements] = useState<string[]>(savedata.querySelector('achievementsList')!.innerHTML.split(' '));
+  const [achievements, setAchievements] = useState<string[]>(savedata.querySelector('achievementsList')!.innerHTML.split(' '));
 
   const changeCoins = (value: string) => {
     savedata.querySelector('coins')!.innerHTML = value;
@@ -56,7 +56,7 @@ export default function Editor({savedata, setSavedata }: {savedata: XMLDocument,
     const unlocks = stats.querySelectorAll('unlock');
     let unlockElement: Element | undefined = undefined;
     unlocks.forEach((element) => {
-      if (!unlockElement && element.textContent === unlock) 
+      if (!unlockElement && element.textContent === unlock)
         unlockElement = element;
     });
     return unlockElement;
@@ -69,7 +69,7 @@ export default function Editor({savedata, setSavedata }: {savedata: XMLDocument,
   }
 
   const removeStatsRequirements = (name: string) => {
-    switch(name) {
+    switch (name) {
       case 'The Basics':
         // TODO: Find a way to only overwrite the white pickups.
         if (window.confirm('Disabling this challenge will erase the logs of all discovered pickups. Press OK if you want to continue.'))
@@ -180,28 +180,29 @@ export default function Editor({savedata, setSavedata }: {savedata: XMLDocument,
       case 'Characters.Engineer':
         stats.querySelector('stat[name="totalStagesCompleted"]')!.textContent = '0';
         break;
-      
+
     }
   }
 
   return (
     <div>
-    <div className="form-group row">
-      <label htmlFor="coins" className="col-sm-2 col-form-label">Coins</label>
-      <div className="col-sm-10">
-        <input type="number" className="form-control" id="coins" defaultValue={coins} min="0" onChange={(e) => changeCoins(e.target.value)} />
+      <div className="form-group row">
+        <label htmlFor="coins" className="col-sm-2 col-form-label">Coins</label>
+        <div className="col-sm-10">
+          <input type="number" className="form-control" id="coins" defaultValue={coins} min="0" onChange={(e) => changeCoins(e.target.value)} />
+        </div>
       </div>
-    </div>
 
-    <div style={{display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridGap: 12}}>
-      {challenges.map((challenge) =>
-        <ChallengeBox 
-          challenge={challenge}
-          selected={achievements.includes(challenge.achievement)} 
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => changeChallenge(challenge, e.target.checked)} 
-        />
-      )}
-    </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridGap: 12 }}>
+        {challenges.map((challenge) =>
+          <ChallengeBox
+            key={challenge.achievement}
+            challenge={challenge}
+            selected={achievements.includes(challenge.achievement)}
+            onClick={(selected: boolean) => changeChallenge(challenge, selected)}
+          />
+        )}
+      </div>
 
     </div>
   );

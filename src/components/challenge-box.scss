@@ -1,9 +1,45 @@
 .grid {
+  position: relative;
   display: grid;
-  grid-template-columns: 84px 1fr 30px;
+  padding: 0;
+  margin: 0;
+  grid-template-columns: 84px 1fr;
   background-color: #28333D;
   border: 2px solid #33404D;
+  color: #ffffff;
+  text-align: left;
   align-items: center;
+
+  &.selected {
+    background-color: #6C5B33;
+    border-color: #E2E15E;
+  }
+
+  &:hover {
+    &::after {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: white;
+      opacity: 0.05;
+    }
+
+    background-color: #62666B;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      left: -7px;
+      bottom: -7px;
+      right: -7px;
+      border: 2px solid #ffffff;
+    }
+  }
 
   .icon {
     margin: -2px;
