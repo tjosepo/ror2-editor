@@ -22,3 +22,11 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+### Firebase ###
+.idea
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/

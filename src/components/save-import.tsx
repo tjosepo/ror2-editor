@@ -1,7 +1,13 @@
 import React, { useRef } from 'react';
 import Button from './button';
 
-export default function SaveImport({ setFilename, setSavedata }: { setFilename:React.Dispatch<string>, setSavedata: React.Dispatch<XMLDocument> }) {
+interface Props {
+  setFilename: React.Dispatch<string>, 
+  setSavedata: React.Dispatch<XMLDocument>,
+  style?: React.CSSProperties
+}
+
+export default function SaveImport({ setFilename, setSavedata, style }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const _import = (files : FileList | null) => {
@@ -40,7 +46,7 @@ export default function SaveImport({ setFilename, setSavedata }: { setFilename:R
         onChange={(e) => _import(e.target.files)}
         ref={inputRef}
         />
-      <Button onClick={(e) => click()}>
+      <Button style={style} onClick={(e) => click()}>
         Import savefile
       </Button>
     </>

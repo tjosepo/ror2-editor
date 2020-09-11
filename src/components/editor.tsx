@@ -194,9 +194,10 @@ export default function Editor({ savedata, setSavedata }: { savedata: XMLDocumen
         </div>
       </div>
 
-      <h2>Challenge</h2>
-
-      <Button onClick={(e) => unlockAll()}>Unlock all</Button>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
+        <h2>Challenge</h2>
+        <Button onClick={(e) => unlockAll()}>Unlock all</Button>
+      </div>
 
       <div className="challenge-grid">
         {challenges.map((challenge) =>

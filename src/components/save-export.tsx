@@ -2,7 +2,13 @@ import React from 'react';
 import { saveAs } from 'file-saver';
 import Button from './button';
 
-export default function SaveExport({ filename, savedata }: { filename: string, savedata: XMLDocument }) {
+interface Props {
+  filename: string, 
+  savedata: XMLDocument
+  style?: React.CSSProperties
+}
+
+export default function SaveExport({ filename, savedata, style }: Props) {
   const _export = () => {
     const savefile = getSavefile(savedata);
     saveAs(savefile, filename);
@@ -16,7 +22,7 @@ export default function SaveExport({ filename, savedata }: { filename: string, s
   }
 
   return (
-    <Button onClick={(e) => _export()}>
+    <Button style={style} onClick={(e) => _export()}>
       Export savefile
     </Button>
   );
