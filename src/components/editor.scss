@@ -1,0 +1,16 @@
+.challenge-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 12px;
+  border: 4px solid #1C2632;
+  padding: 4px 42px;
+  margin: 0 auto;
+
+  @media (min-width: 769px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1441px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}

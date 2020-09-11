@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Challenge, challenges } from '../challenges';
 import ChallengeBox from './challenge-box';
+import './editor.scss';
+import Button from './button';
 
 export default function Editor({ savedata, setSavedata }: { savedata: XMLDocument, setSavedata: React.Dispatch<XMLDocument> }) {
   const coins = savedata.querySelector('coins')!.innerHTML;
   const stats = savedata.querySelector('stats')!;
-  const [achievements, setAchievements] = useState<string[]>(savedata.querySelector('achievementsList')!.innerHTML.split(' '));
+  const [achievements, setAchievements] = useState(savedata.querySelector('achievementsList')!.innerHTML.split(' '));
 
   const changeCoins = (value: string) => {
     savedata.querySelector('coins')!.innerHTML = value;
@@ -20,24 +22,23 @@ export default function Editor({ savedata, setSavedata }: { savedata: XMLDocumen
       removeUnlock(challenge.unlock);
       removeStatsRequirements(challenge.name);
     }
+    setAchievements([...achievements]);
   }
 
   const addAchievement = (achievement: string) => {
     if (achievements.includes(achievement)) return;
 
-    const newAchievements = [...achievements, achievement];
-    const achievementsAsString = newAchievements.join(' ');
+    achievements.push(achievement);
+    const achievementsAsString = achievements.join(' ');
     savedata.querySelector('achievementsList')!.innerHTML = achievementsAsString;
-    setAchievements(newAchievements);
   }
 
   const removeAchievement = (achievement: string) => {
     if (!achievements.includes(achievement)) return;
 
-    const newAchievements = achievements.filter((currentAchievement) => currentAchievement !== achievement);
-    const achievementsAsString = newAchievements.join(' ');
+    achievements.splice(achievements.indexOf(achievement), 1);
+    const achievementsAsString = achievements.join(' ');
     savedata.querySelector('achievementsList')!.innerHTML = achievementsAsString;
-    setAchievements(newAchievements);
   }
 
   const addUnlock = (unlock: string) => {
@@ -72,8 +73,7 @@ export default function Editor({ savedata, setSavedata }: { savedata: XMLDocumen
     switch (name) {
       case 'The Basics':
         // TODO: Find a way to only overwrite the white pickups.
-        if (window.confirm('Disabling this challenge will erase the logs of all discovered pickups. Press OK if you want to continue.'))
-          savedata.querySelector('discoveredPickups')!.textContent = '';
+        savedata.querySelector('discoveredPickups')!.textContent = '';
         break;
       case 'Learning Process':
         stats.querySelector('stat[name="totalDeaths"]')!.textContent = '0';
@@ -86,8 +86,7 @@ export default function Editor({ savedata, setSavedata }: { savedata: XMLDocumen
         break;
       case 'Experimenting':
         // TODO: Find a way to only overwrite the equipment pickups.
-        if (window.confirm('Disabling this challenge will erase the logs of all discovered pickups. Press OK if you want to continue.'))
-          savedata.querySelector('discoveredPickups')!.textContent = '';
+        savedata.querySelector('discoveredPickups')!.textContent = '';
         break;
       case 'Newtist':
         // TODO: There are some missing newt locations.
@@ -121,58 +120,56 @@ export default function Editor({ savedata, setSavedata }: { savedata: XMLDocumen
         stats.querySelector('stat[name="totalGoldCollected"]')!.textContent = '0';
         break;
       case 'Bookworm':
-        if (window.confirm('Disabling this challenge will erase all enemy and environmental logs. Press OK if you want to continue.')) {
-          removeUnlock('Logs.BeetleBody.0');
-          removeUnlock('Logs.BeetleGuardBody.0');
-          removeUnlock('Logs.BeetleQueenBody.0');
-          removeUnlock('Logs.BellBody.0');
-          removeUnlock('Logs.BisonBody.0');
-          removeUnlock('Logs.BrotherBody.0');
-          removeUnlock('Logs.ClayBody.0');
-          removeUnlock('Logs.ClayBossBody.0');
-          removeUnlock('Logs.ClayBruiserBody.0');
-          removeUnlock('Logs.ElectricWormBody.0');
-          removeUnlock('Logs.GolemBody.0');
-          removeUnlock('Logs.GravekeeperBody.0');
-          removeUnlock('Logs.GreaterWispBody.0');
-          removeUnlock('Logs.HermitCrabBody.0');
-          removeUnlock('Logs.ImpBody.0');
-          removeUnlock('Logs.ImpBossBody.0');
-          removeUnlock('Logs.JellyfishBody.0');
-          removeUnlock('Logs.LemurianBody.0');
-          removeUnlock('Logs.LemurianBruiserBody.0');
-          removeUnlock('Logs.LunarGolem.0');
-          removeUnlock('Logs.LunarWisp.0');
-          removeUnlock('Logs.MagmaWormBody.0');
-          removeUnlock('Logs.MiniMushroom.0');
-          removeUnlock('Logs.Nullifier.0');
-          removeUnlock('Logs.Parent.0');
-          removeUnlock('Logs.RoboBallBossBody.0');
-          removeUnlock('Logs.RoboBallMiniBody.0');
-          removeUnlock('Logs.Scav.0');
-          removeUnlock('Logs.SuperRoboBallBossBody.0');
-          removeUnlock('Logs.TitanBody.0');
-          removeUnlock('Logs.TitanGoldBody.0');
-          removeUnlock('Logs.VagrantBody.0');
-          removeUnlock('Logs.VultureBody.0');
-          removeUnlock('Logs.WispBody.0');
-          removeUnlock('Logs.Stages.arena');
-          removeUnlock('Logs.Stages.artifactworld');
-          removeUnlock('Logs.Stages.bazaar');
-          removeUnlock('Logs.Stages.blackbeach');
-          removeUnlock('Logs.Stages.dampcavesimple');
-          removeUnlock('Logs.Stages.foggyswamp');
-          removeUnlock('Logs.Stages.frozenwall');
-          removeUnlock('Logs.Stages.goldshores');
-          removeUnlock('Logs.Stages.golemplains');
-          removeUnlock('Logs.Stages.goolake');
-          removeUnlock('Logs.Stages.limbo');
-          removeUnlock('Logs.Stages.moon');
-          removeUnlock('Logs.Stages.mysteryspace');
-          removeUnlock('Logs.Stages.shipgraveyard');
-          removeUnlock('Logs.Stages.skymeadow');
-          removeUnlock('Logs.Stages.wispgraveyard');
-        }
+        removeUnlock('Logs.BeetleBody.0');
+        removeUnlock('Logs.BeetleGuardBody.0');
+        removeUnlock('Logs.BeetleQueenBody.0');
+        removeUnlock('Logs.BellBody.0');
+        removeUnlock('Logs.BisonBody.0');
+        removeUnlock('Logs.BrotherBody.0');
+        removeUnlock('Logs.ClayBody.0');
+        removeUnlock('Logs.ClayBossBody.0');
+        removeUnlock('Logs.ClayBruiserBody.0');
+        removeUnlock('Logs.ElectricWormBody.0');
+        removeUnlock('Logs.GolemBody.0');
+        removeUnlock('Logs.GravekeeperBody.0');
+        removeUnlock('Logs.GreaterWispBody.0');
+        removeUnlock('Logs.HermitCrabBody.0');
+        removeUnlock('Logs.ImpBody.0');
+        removeUnlock('Logs.ImpBossBody.0');
+        removeUnlock('Logs.JellyfishBody.0');
+        removeUnlock('Logs.LemurianBody.0');
+        removeUnlock('Logs.LemurianBruiserBody.0');
+        removeUnlock('Logs.LunarGolem.0');
+        removeUnlock('Logs.LunarWisp.0');
+        removeUnlock('Logs.MagmaWormBody.0');
+        removeUnlock('Logs.MiniMushroom.0');
+        removeUnlock('Logs.Nullifier.0');
+        removeUnlock('Logs.Parent.0');
+        removeUnlock('Logs.RoboBallBossBody.0');
+        removeUnlock('Logs.RoboBallMiniBody.0');
+        removeUnlock('Logs.Scav.0');
+        removeUnlock('Logs.SuperRoboBallBossBody.0');
+        removeUnlock('Logs.TitanBody.0');
+        removeUnlock('Logs.TitanGoldBody.0');
+        removeUnlock('Logs.VagrantBody.0');
+        removeUnlock('Logs.VultureBody.0');
+        removeUnlock('Logs.WispBody.0');
+        removeUnlock('Logs.Stages.arena');
+        removeUnlock('Logs.Stages.artifactworld');
+        removeUnlock('Logs.Stages.bazaar');
+        removeUnlock('Logs.Stages.blackbeach');
+        removeUnlock('Logs.Stages.dampcavesimple');
+        removeUnlock('Logs.Stages.foggyswamp');
+        removeUnlock('Logs.Stages.frozenwall');
+        removeUnlock('Logs.Stages.goldshores');
+        removeUnlock('Logs.Stages.golemplains');
+        removeUnlock('Logs.Stages.goolake');
+        removeUnlock('Logs.Stages.limbo');
+        removeUnlock('Logs.Stages.moon');
+        removeUnlock('Logs.Stages.mysteryspace');
+        removeUnlock('Logs.Stages.shipgraveyard');
+        removeUnlock('Logs.Stages.skymeadow');
+        removeUnlock('Logs.Stages.wispgraveyard');
         break;
       case 'Cleanup Duty':
         stats.querySelector('stat[name="totalMaulingRockKills"]')!.textContent = '0';
@@ -184,6 +181,10 @@ export default function Editor({ savedata, setSavedata }: { savedata: XMLDocumen
     }
   }
 
+  const unlockAll = () => {
+    challenges.forEach((challenge) => changeChallenge(challenge, true));
+  }
+
   return (
     <div>
       <div className="form-group row">
@@ -193,17 +194,20 @@ export default function Editor({ savedata, setSavedata }: { savedata: XMLDocumen
         </div>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gridGap: 12 }}>
+      <h2>Challenge</h2>
+
+      <Button onClick={(e) => unlockAll()}>Unlock all</Button>
+
+      <div className="challenge-grid">
         {challenges.map((challenge) =>
           <ChallengeBox
             key={challenge.achievement}
             challenge={challenge}
-            selected={achievements.includes(challenge.achievement)}
+            achievements={achievements}
             onClick={(selected: boolean) => changeChallenge(challenge, selected)}
           />
         )}
       </div>
-
     </div>
   );
 }

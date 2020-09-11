@@ -1,4 +1,19 @@
+@font-face {
+  font-family: 'Bombard';
+  src: url('./fonts/bombard.woff2') format('woff2'), 
+    url('./fonts/bombard.woff') format('woff'),
+    url('./fonts/bombard.ttf') format('truetype');
+}
+
+
+html, body, #root {
+  height: 100%;
+}
+
 body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Bombard', Arial, sans-serif;
   color: #ffffff;
-  background-color: #1A1515;
+  background-color: #000000;
 }
