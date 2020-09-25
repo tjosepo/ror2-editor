@@ -17,3 +17,15 @@ body {
   color: #ffffff;
   background-color: #000000;
 }
+
+a, .link {
+  border: none;
+  background-color: transparent;
+  overflow: hidden;
+  color: #627b94;
+
+  &:hover {
+    color: #627b94;
+    text-decoration: underline;
+  }
+}

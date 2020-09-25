@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import Button from './button';
+import sample from '../sample-save';
 
 interface Props {
   setFilename: React.Dispatch<string>, 
@@ -36,6 +37,14 @@ export default function SaveImport({ setFilename, setSavedata, style }: Props) {
     input.click();
   }
 
+  const importSample = () => {
+    const parser = new DOMParser();
+    const savedata = parser.parseFromString(sample, 'text/xml') as XMLDocument;
+    console.log(savedata);
+    setFilename("sample.xml");
+    setSavedata(savedata);
+  }
+
   return (
     <>
       <input
@@ -49,6 +58,7 @@ export default function SaveImport({ setFilename, setSavedata, style }: Props) {
       <Button style={style} onClick={(e) => click()}>
         Import savefile
       </Button>
+      <div style={{textAlign: "center"}}><button className="link" onClick={importSample}>Just want to try it out? Use our sample savefile</button></div>
     </>
   );
 }

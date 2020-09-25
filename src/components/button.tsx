@@ -1,20 +1,18 @@
 import React from 'react';
 import './button.scss';
 
-interface Props {
-  children?: React.ReactNode, 
-  style?: React.CSSProperties, 
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+interface Props extends React.ButtonHTMLAttributes<any> {
+  children?: React.ReactNode,
 }
 
-export default function Button({ children, style, onClick = () => false }: Props) {
+export default function Button({ children, style, onClick }: Props) {
 
   return (
     <button
       style={style}
-      className="ror-button"
+      className="ror2-button"
       type="button"
-      onClick={(e) => onClick(e)}>
+      onClick={onClick}>
       { children }
     </button>
   );

@@ -17,14 +17,14 @@ export default function Controller() {
       <p>
         Your savefile should be located at: <span style={{color: "#E3E9EB"}}>C:\Program Files (x86)\Steam\userdata\[Number]\632360\remote\UserProfiles</span>
       </p>
-      {!savedata && 
+      {savedata ?
+        <>
+          <SaveExport style={{ width: "100%", marginBottom: "1rem" }} filename={filename} savedata={savedata} />
+          <Editor savedata={savedata} setSavedata={setSavedata} />
+        </>
+      :
       <>
-        <SaveImport style={{ width: "100%" }}setFilename={setFilename} setSavedata={setSavedata} />
-      </>}
-      {savedata &&
-      <>
-        <SaveExport style={{ width: "100%", marginBottom: "1rem" }} filename={filename} savedata={savedata} />
-        <Editor savedata={savedata} setSavedata={setSavedata} />
+        <SaveImport style={{ width: "100%", marginBottom: "1rem" }} setFilename={setFilename} setSavedata={setSavedata} />
       </>
       }
     </div>
