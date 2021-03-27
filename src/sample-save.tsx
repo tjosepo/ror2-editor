@@ -1,5 +1,4 @@
-export default
-`<?xml version="1.0" encoding="UTF-8"?><UserProfile>
+const save = `<?xml version="1.0" encoding="UTF-8"?><UserProfile>
 <achievementsList>KillEliteMonster CompleteTeleporter Die5Times Discover5Equipment TotalMoneyCollected MaxHealingShrine KillBossQuantityInRun CompleteUnknownEnding KillTotalEnemies FreeMage MoveSpeed RepeatedlyDuplicateItems MercDontTouchGround Complete30StagesCareer LogCollector TotalDronesRepaired KillElitesMilestone KillBossQuick BurnToDeath ToolbotGuardTeleporter MultiCombatShrine ToolbotKillImpBossWithBfg RescueTreebot EngiClearTeleporterWithZeroMonsters Die20Times ObtainArtifactCommand ObtainArtifactEliteOnly ObtainArtifactSacrifice HuntressMaintainFullHealthOnFrozenWall ObtainArtifactFriendlyFire CleanupDuty ToolbotClearGameMonsoon LoaderSpeedRun HuntressAllGlaiveBouncesKill HuntressCollectCrowbars CompleteMultiBossShrine AutomationActivation NeverBackDown CompleteThreeStages CommandoFastFirstStageClear ObtainArtifactRandomSurvivorOnRespawn CrocoClearGameMonsoon</achievementsList>
 <coins>72</coins>
 <discoveredPickups/>
@@ -2060,4 +2059,6 @@ export default
     </BodyLoadout>
   </BodyLoadouts>
 </loadout>
-</UserProfile>`
+</UserProfile>`;
+
+export default save;

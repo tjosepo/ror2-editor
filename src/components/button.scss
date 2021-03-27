@@ -4,7 +4,7 @@
   font-size: 1rem;
   font-weight: 500;
   background-color: #425161;
-  border: 1px solid #87888B;
+  border: 1px solid #87888b;
   padding: 10px 15px;
   box-shadow: inset 0px 0px 3px 2px #536678;
   text-shadow: 0px 1px black;
@@ -14,11 +14,11 @@
   }
 
   &:hover {
-    background-color: #B2B57C;
-    box-shadow: inset 0px 0px 3px 2px #DCDE9A;
+    background-color: #b2b57c;
+    box-shadow: inset 0px 0px 3px 2px #dcde9a;
 
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: -8px;
       left: -8px;
@@ -45,7 +45,7 @@
   }
 
   &:active {
-    background-color: #989C59;
-    box-shadow: inset 0px 0px 3px 2px #DCDE9A;
+    background-color: #989c59;
+    box-shadow: inset 0px 0px 3px 2px #dcde9a;
   }
 }

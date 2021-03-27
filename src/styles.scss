@@ -1,24 +1,43 @@
 @font-face {
-  font-family: 'Bombard';
-  src: url('./fonts/bombard.woff2') format('woff2'), 
-    url('./fonts/bombard.woff') format('woff'),
-    url('./fonts/bombard.ttf') format('truetype');
+  font-family: "Bombard";
+  src: url("./fonts/bombard.woff2") format("woff2"),
+    url("./fonts/bombard.woff") format("woff"),
+    url("./fonts/bombard.ttf") format("truetype");
 }
 
-
-html, body, #root {
+html,
+body {
   height: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
 }
 
 body {
-  padding: 0;
   margin: 0;
-  font-family: 'Bombard', Arial, sans-serif;
+  font-family: "Bombard", Arial, sans-serif;
   color: #ffffff;
   background-color: #000000;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
-a, .link {
+#root {
+  height: 100%;
+}
+
+a,
+.link {
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
   border: none;
   background-color: transparent;
   overflow: hidden;
@@ -27,5 +46,65 @@ a, .link {
   &:hover {
     color: #627b94;
     text-decoration: underline;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+button {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+.container {
+  width: 100%;
+  margin: 60px auto;
+  padding: 0 16px;
+
+  @media (min-width: 576px) {
+    max-width: 540px;
+  }
+
+  @media (min-width: 768px) {
+    max-width: 720px;
+  }
+
+  @media (min-width: 992px) {
+    max-width: 960px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1140px;
   }
 }
