@@ -60,17 +60,6 @@ export const challenges: Challenge[] = [
   { name: 'Cleanup Duty', description: 'Destroy 20 flying rocks in Sky Meadow.', unlock: 'Items.Recycle', achievement: 'CleanupDuty', icon: 'items/recycle' },
   { name: 'I Love Dying!', description: 'Die 20 times.', unlock: 'Items.DeathProjectile', achievement: 'Die20Times', icon: 'items/deathprojectile' },
 
-  /* Characters */
-  { name: 'Warrior', description: 'Reach and complete the 3rd Teleporter event without dying.', unlock: 'Characters.Huntress', achievement: 'CompleteThreeStages', icon: 'characters/huntress' },
-  { name: 'Verified', description: 'Complete the first Teleporter event 5 times.', unlock: 'Characters.Toolbot', achievement: 'RepeatFirstTeleporter', icon: 'characters/toolbot' },
-  { name: 'Engineering Perfection', description: 'Complete 30 stages.', unlock: 'Characters.Engineer', achievement: 'Complete30StagesCareer', icon: 'characters/engineer' },
-  { name: 'Pause', description: 'Free the survivor suspended in time.', unlock: 'Characters.Mage', achievement: 'FreeMage', icon: 'characters/mage' },
-  { name: 'True Respite', description: 'Obliterate yourself at the Obelisk.', unlock: 'Characters.Mercenary', achievement: 'CompleteUnknownEnding', icon: 'characters/mercenary' },
-  { name: 'Power Plant', description: 'Repair the broken robot with an Escape Pod\'s Fuel Array.', unlock: 'Characters.Treebot', achievement: 'RescueTreebot', icon: 'characters/treebot' },
-  { name: 'Guidance Offline', description: 'Defeat the unique guardian of Siren\'s Call.', unlock: 'Characters.Loader', achievement: 'DefeatSuperRoboBallBoss', icon: 'characters/loader' },
-  { name: '...To Be Left Alone', description: 'Stabilize the Cell in the Void Fields.', unlock: 'Characters.Croco', achievement: 'BeatArena', icon: 'characters/croco' },
-  { name: 'Washed Away', description: 'Beat the game.', unlock: 'Characters.Captain', achievement: 'CompleteMainEnding', icon: 'characters/captain' },
-
   /* Commando skills */
   { name: 'Commando: Godspeed', description: 'As Commando, fully charge the first-stage teleporter before the timer hits 5 minutes.', unlock: 'Skills.Commando.SlideJet', achievement: 'CommandoFastFirstStageClear', icon: 'skills/commando/slidejet' },
   { name: 'Commando: Rolling Thunder', description: 'As Commando, land the killing blow on an Overloading Worm.', unlock: 'Skills.Commando.FireShotgunBlast', achievement: 'CommandoKillOverloadingWorm', icon: 'skills/commando/fireshotgunblast' },
@@ -83,47 +72,67 @@ export const challenges: Challenge[] = [
   { name: 'Huntress: Piercing Wind', description: 'As Huntress, start and finish either Rallypoint Delta or Scorched Acres without falling below 100% health.', unlock: 'Skills.Huntress.Snipe', achievement: 'HuntressMaintainFullHealthOnFrozenWall', icon: 'skills/huntress/snipe' },
   { name: 'Huntress: Mastery', description: 'As Huntress, beat the game or obliterate on Monsoon.', unlock: 'Skins.Huntress.Alt1', achievement: 'HuntressClearGameMonsoon', icon: 'skins/huntress/alt1' },
 
+  /* Bandit skills */
+  { name: 'Warrior', description: 'Reach and complete the 3rd Teleporter event without dying.', unlock: 'Characters.Bandit2', achievement: 'CompleteThreeStages', icon: 'characters/bandit2' },
+  { name: 'Bandit: Classic Man', description: "As Bandit, successfully use 'Lights Out' to reset your cooldowns 15 times in a row.", unlock: 'Skills.Bandit2.Rifle', achievement: 'Bandit2ConsecutiveReset', icon: 'skills/bandit2/rifle' },
+  { name: 'Bandit: Sadist', description: "As Bandit, kill a monster with 20 stacks of Hemorrhage.", unlock: 'Skills.Bandit2.SerratedShivs', achievement: 'Bandit2StackSuperBleed', icon: 'skills/bandit2/serrated-shivs' },
+  { name: 'Bandit: B&E', description: "As Bandit, kill the final boss with 'Lights Out'.", unlock: 'Skills.Bandit2.SkullRevolver', achievement: 'Bandit2RevolverFinale', icon: 'skills/bandit2/skull-revolver' },
+  { name: 'Bandit: Mastery', description: "As Bandit, beat the game or obliterate on Monsoon'.", unlock: 'Skills.Bandit2.Alt1', achievement: 'Bandit2ClearGameMonsoon', icon: 'skins/bandit2/alt1' },
+
   /* MUL-T skills */
+  { name: 'Verified', description: 'Complete the first Teleporter event 5 times.', unlock: 'Characters.Toolbot', achievement: 'RepeatFirstTeleporter', icon: 'characters/toolbot' },
   { name: 'MUL-T: Pest Control', description: 'As MUL-T, defeat two Beetle Queens without leaving the teleporter zone.', unlock: 'Skills.Toolbot.Grenade', achievement: 'ToolbotGuardTeleporter', icon: 'skills/toolbot/grenade' },
   { name: 'MUL-T: Gotcha!', description: 'As MUL-T, land the killing blow on an Imp Overlord with the Preon Accumulator.', unlock: 'Skills.Toolbot.Buzzsaw', achievement: 'ToolbotKillImpBossWithBfg', icon: 'skills/toolbot/buzzsaw' },
+  { name: 'MUL-T: Seventh Day', description: 'As MUL-T, clear the Void Fields on Stage 7 or later.', unlock: 'Skills.Toolbot.SpecialAlt', achievement: 'ToolbotBeatArenaLater', icon: 'skills/toolbot/special-alt' },
   { name: 'MUL-T: Mastery', description: 'As MUL-T, beat the game or obliterate on Monsoon.', unlock: 'Skins.Toolbot.Alt1', achievement: 'ToolbotClearGameMonsoon', icon: 'skins/toolbot/alt1' },
 
   /* Engineer skills */
+  { name: 'Engineering Perfection', description: 'Complete 30 stages.', unlock: 'Characters.Engineer', achievement: 'Complete30StagesCareer', icon: 'characters/engineer' },
   { name: 'Engineer: Better With Friends', description: 'As Engineer, recruit 12 minions at one time.', unlock: 'Skills.Engi.WalkerTurret', achievement: 'EngiArmy', icon: 'skills/engi/walkerturret' },
   { name: 'Engineer: 100% Calculated', description: 'As Engineer, defeat the teleporter boss in less than 5 seconds after it spawns.', unlock: 'Skills.Engi.SpiderMine', achievement: 'EngiKillBossQuick', icon: 'skills/engi/spidermine' },
   { name: 'Engineer: Zero Sum', description: 'As Engineer, finish chargin the teleporter with zero monsters remaining on the stage.', unlock: 'Skills.Engi.Harpoon', achievement: 'EngiClearTeleporterWithZeroMonsters', icon: 'skills/engi/harpoon' },
   { name: 'Engineer: Mastery', description: 'As Engineer, beat the game or obliterate on Monsoon.', unlock: 'Skins.Engi.Alt1', achievement: 'EngiClearGameMonsoon', icon: 'skins/engi/alt1' },
 
   /* Artificer skills */
+  { name: 'Pause', description: 'Free the survivor suspended in time.', unlock: 'Characters.Mage', achievement: 'FreeMage', icon: 'characters/mage' },
   { name: 'Artificer: Massacre', description: 'As Artificer, perform a multikill of 20 enemies.', unlock: 'Skills.Mage.LightningBolt', achievement: 'MageMultiKill', icon: 'skills/mage/lightningbolt' },
   { name: 'Artificer: Orbital Bombardment', description: 'As Artificer, kill 15 enemies before touching the ground.', unlock: 'Skills.Mage.FlyUp', achievement: 'MageAirborneMultiKill', icon: 'skills/mage/flyup' },
   { name: 'Artificer: Chunked!', description: 'As Artificer, fully defeat the teleport boss in a one-second burst of damage.', unlock: 'Skills.Mage.IceBomb', achievement: 'MageFastBoss', icon: 'skills/mage/icebomb' },
   { name: 'Artificer: Mastery', description: 'As Artificer, beat the game or obliterate on Monsoon.', unlock: 'Skins.Mage.Alt1', achievement: 'MageClearGameMonsoon', icon: 'skins/mage/alt1' },
 
   /* Mercenary skills */
+  { name: 'True Respite', description: 'Obliterate yourself at the Obelisk.', unlock: 'Characters.Mercenary', achievement: 'CompleteUnknownEnding', icon: 'characters/mercenary' },
   { name: 'Mercenary: Ethereal', description: 'As Mercenary, perform a multikill of 20 enemies.', unlock: 'Skills.Merc.EvisProjectile', achievement: 'MercCompleteTrialWithFullHealth', icon: 'skills/merc/evisprojectile' },
+  { name: 'Mercenary: Flash of Blades', description: 'As Mercenary, use 20 abilities in 10 seconds.', unlock: 'Skills.Merc.FocusedAssault', achievement: 'MercXSkillsInYSeconds', icon: 'skills/merc/focused-assault' },
   { name: 'Mercenary: Demon of the Skies', description: 'As Mercenary, kill 15 enemies before touching the ground.', unlock: 'Skills.Merc.Uppercut', achievement: 'MercDontTouchGround', icon: 'skills/merc/uppercut' },
   { name: 'Mercenary: Mastery', description: 'As Mercenary, beat the game or obliterate on Monsoon.', unlock: 'Skins.Merc.Alt1', achievement: 'MercClearGameMonsoon', icon: 'skins/merc/alt1' },
 
   /* REX skills */
+  { name: 'Power Plant', description: 'Repair the broken robot with an Escape Pod\'s Fuel Array.', unlock: 'Characters.Treebot', achievement: 'RescueTreebot', icon: 'characters/treebot' },
   { name: 'REX: Bushwhacked', description: 'As REX, complete an entire teleporter event while under 50% health.', unlock: 'Skills.Treebot.Barrage', achievement: 'TreebotLowHealthTeleporter', icon: 'skills/treebot/barrage' },
+  { name: 'REX: Bushwhacked', description: 'As REX, complete an entire teleporter event while under 50% health.', unlock: 'Skills.Treebot.SpecialAlt1', achievement: 'TreebotBigHeal', icon: 'skills/treebot/special-alt1' },
   { name: 'REX: Dunked', description: 'As REX, kill a Clay Dunestrider on Abandoned Aqueduct by throwing it into a pit.', unlock: 'Skills.Treebot.PlantSonicBoom', achievement: 'TreebotDunkClayBoss', icon: 'skills/treebot/plantsonicboom' },
   { name: 'REX: Mastery', description: 'As REX, beat the game or obliterate on Monsoon.', unlock: 'Skins.Treebot.Alt1', achievement: 'TreebotClearGameMonsoon', icon: 'skins/treebot/alt1' },
 
   /* Loader skills */
+  { name: 'Guidance Offline', description: 'Defeat the unique guardian of Siren\'s Call.', unlock: 'Characters.Loader', achievement: 'DefeatSuperRoboBallBoss', icon: 'characters/loader' },
   { name: 'Loader: Swing By', description: 'As Loader, reach and proceed through the Celestial Portal in 25 minutes or less.', unlock: 'Skills.Loader.ZapFist', achievement: 'LoaderSpeedRun', icon: 'skills/loader/zapfist' },
   { name: 'Loader: Earthshatter', description: 'As Loader, land a Charged Gauntlet hit at 300mph or higher.', unlock: 'Skills.Loader.YankHook', achievement: 'LoaderBigSlam', icon: 'skills/loader/yankhook' },
+  { name: 'Loader: The Thunderdome', description: "As Loader, kill three other Loaders in the Bulwark's ambry.", unlock: 'Skills.Loader.Thunderslam', achievement: 'LoaderKillLoaders', icon: 'skills/loader/thunderslam' },
   { name: 'Loader: Mastery', description: 'As Loader, beat the game or obliterate on Monsoon.', unlock: 'Skins.Loader.Alt1', achievement: 'LoaderClearGameMonsoon', icon: 'skins/loader/alt1' },
 
   /* Acrid skills */
+  { name: '...To Be Left Alone', description: 'Stabilize the Cell in the Void Fields.', unlock: 'Characters.Croco', achievement: 'BeatArena', icon: 'characters/croco' },
   { name: 'Acrid: Pandemic', description: 'As Acrid, inflict Poison 1000 total times.', unlock: 'Skills.Croco.ChainableLeap', achievement: 'CrocoTotalInfectionsMilestone', icon: 'skills/croco/chainableleap' },
   { name: 'Acrid: Bad Medecine', description: 'As Acrid, land the final blow on a Scavenger.', unlock: 'Skills.Croco.CrocoBite', achievement: 'CrocoKillScavenger', icon: 'skills/croco/crocobite' },
   { name: 'Acrid: Easy Prey', description: 'As Acrid, land the killing blow on 50 total enemies that have 1 hit point left.', unlock: 'Skills.Croco.PassivePoisonLethal', achievement: 'CrocoKillWeakEnemiesMilestone', icon: 'skills/croco/passivepoisonlethal' },
   { name: 'Acrid: Mastery', description: 'As Acrid, beat the game or obliterate on Monsoon.', unlock: 'Skins.Croco.Alt1', achievement: 'CrocoClearGameMonsoon', icon: 'skins/croco/alt1' },
   
   /* Captain skills */
+  { name: 'Washed Away', description: 'Beat the game.', unlock: 'Characters.Captain', achievement: 'CompleteMainEnding', icon: 'characters/captain' },
   { name: 'Captain: Wanderlust', description: 'As Captain, visit 10 different environments in a single run', unlock: 'Skills.Captain.CaptainSupplyDropEquipmentRestock', achievement: 'CaptainVisitSeveralStages', icon: 'skills/captain/captainsupplydropequipmentrestock' },
   { name: 'Captain: Worth Every Penny', description: 'As Captain, repair and recruit a TC-280 Prototype.', unlock: 'Skills.Captain.CaptainSupplyDropHacking', achievement: 'CaptainBuyMegaDrone', icon: 'skills/captain/captainsupplydrophacking' },
+  { name: 'Captain: Smushed', description: 'As Captain, kill the final boss using a Supply Beacon.', unlock: 'Skills.Captain.UtilityAlt1', achievement: 'CaptainSupplyDropFinale', icon: 'skills/captain/utility-alt1' },
   { name: 'Captain: Mastery', description: 'As Captain, beat the game or obliterate on Monsoon.', unlock: 'Skins.Captain.Alt1', achievement: 'CaptainClearGameMonsoon', icon: 'skins/captain/alt1' },
   
   /* Artifacts */
