@@ -15,3 +15,9 @@ You can run the development server with:
 ```
 npm start
 ```
+
+## Privacy
+
+Google Analytics is used to record the following:
+
+- [Basic visit data](https://support.google.com/analytics/answer/6004245).
