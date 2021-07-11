@@ -1,15 +1,17 @@
-import { Challenge } from "../challenges";
+import { Challenge } from "../../../challenges";
 import "./challenge-box.scss";
+
+interface Props {
+  challenge: Challenge;
+  achievements: String[];
+  onClick: Function;
+}
 
 export default function ChallengeBox({
   challenge,
   achievements,
   onClick,
-}: {
-  challenge: Challenge;
-  achievements: String[];
-  onClick: Function;
-}) {
+}: Props) {
   let selected = achievements.includes(challenge.achievement);
 
   return (

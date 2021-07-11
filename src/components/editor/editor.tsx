@@ -1,24 +1,19 @@
-import React, { useState } from "react";
-import { Challenge, challenges } from "../challenges";
+import { useState } from "react";
+import { Challenge, challenges } from "../../challenges";
 import ChallengeBox from "./challenge-box";
 import "./editor.scss";
-import Button from "./button";
+import Button from "../button";
+import CoinsCounter from "./coins-counter";
 
 interface Props {
   savedata: XMLDocument;
-  setSavedata: React.Dispatch<XMLDocument>;
 }
 
-export default function Editor({ savedata, setSavedata }: Props) {
-  const coins = savedata.querySelector("coins")!.innerHTML;
+export default function Editor({ savedata }: Props) {
   const stats = savedata.querySelector("stats")!;
   const [achievements, setAchievements] = useState(
     savedata.querySelector("achievementsList")!.innerHTML.split(" ")
   );
-
-  const changeCoins = (value: string) => {
-    savedata.querySelector("coins")!.innerHTML = value;
-  };
 
   const changeChallenge = (challenge: Challenge, checked: boolean) => {
     if (checked) {
@@ -37,9 +32,8 @@ export default function Editor({ savedata, setSavedata }: Props) {
 
     achievements.push(achievement);
     const achievementsAsString = achievements.join(" ");
-    savedata.querySelector(
-      "achievementsList"
-    )!.innerHTML = achievementsAsString;
+    savedata.querySelector("achievementsList")!.innerHTML =
+      achievementsAsString;
   };
 
   const removeAchievement = (achievement: string) => {
@@ -47,9 +41,8 @@ export default function Editor({ savedata, setSavedata }: Props) {
 
     achievements.splice(achievements.indexOf(achievement), 1);
     const achievementsAsString = achievements.join(" ");
-    savedata.querySelector(
-      "achievementsList"
-    )!.innerHTML = achievementsAsString;
+    savedata.querySelector("achievementsList")!.innerHTML =
+      achievementsAsString;
   };
 
   const addUnlock = (unlock: string) => {
@@ -216,19 +209,7 @@ export default function Editor({ savedata, setSavedata }: Props) {
 
   return (
     <div>
-      <div className="form-group row">
-        <label htmlFor="coins" className="label">
-          Lunar Coins
-        </label>
-        <input
-          type="number"
-          className="form-control"
-          id="coins"
-          defaultValue={coins}
-          min="0"
-          onChange={(e) => changeCoins(e.target.value)}
-        />
-      </div>
+      <CoinsCounter savedata={savedata} />
 
       <div
         style={{

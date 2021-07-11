@@ -1,23 +1,26 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import Button from "./button";
 import sample from "../sample-save";
 
+import { useSave } from "../contexts/save-context";
+
 interface Props {
-  setFilename: React.Dispatch<string>;
-  setSavedata: React.Dispatch<XMLDocument>;
   style?: React.CSSProperties;
 }
 
-export default function SaveImport({ setFilename, setSavedata, style }: Props) {
+export default function SaveImport({ style }: Props) {
+  const { setSavefile } = useSave();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const _import = (files: FileList | null) => {
     if (files === null) return;
     if (files.length === 0) return;
-    const savefile = files[0];
-    setFilename(savefile.name);
-    getSavedata(savefile, (savedata: XMLDocument) => {
-      setSavedata(savedata);
+    const file = files[0];
+    getSavedata(file, (data: XMLDocument) => {
+      setSavefile({
+        data,
+        filename: file.name,
+      });
     });
   };
 
@@ -42,10 +45,11 @@ export default function SaveImport({ setFilename, setSavedata, style }: Props) {
 
   const importSample = () => {
     const parser = new DOMParser();
-    const savedata = parser.parseFromString(sample, "text/xml") as XMLDocument;
-    console.log(savedata);
-    setFilename("sample.xml");
-    setSavedata(savedata);
+    const data = parser.parseFromString(sample, "text/xml") as XMLDocument;
+    setSavefile({
+      data,
+      filename: "sample.xml",
+    });
   };
 
   return (

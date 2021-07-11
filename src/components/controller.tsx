@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useSave } from "../contexts/save-context";
+
 import Editor from "./editor";
 import SaveExport from "./save-export";
 import SaveImport from "./save-import";
 
 export default function Controller() {
-  const [filename, setFilename] = useState<string>("");
-  const [savedata, setSavedata] = useState<XMLDocument>();
+  const { savefile } = useSave();
 
   return (
     <div className="container">
@@ -23,23 +23,13 @@ export default function Controller() {
           (x86)\Steam\userdata\[Number]\632360\remote\UserProfiles
         </span>
       </p>
-      {savedata ? (
+      {savefile ? (
         <>
-          <SaveExport
-            style={{ width: "100%", marginBottom: "1rem" }}
-            filename={filename}
-            savedata={savedata}
-          />
-          <Editor savedata={savedata} setSavedata={setSavedata} />
+          <SaveExport style={{ width: "100%", marginBottom: "1rem" }} />
+          <Editor savedata={savefile.data} />
         </>
       ) : (
-        <>
-          <SaveImport
-            style={{ width: "100%", marginBottom: "1rem" }}
-            setFilename={setFilename}
-            setSavedata={setSavedata}
-          />
-        </>
+        <SaveImport style={{ width: "100%", marginBottom: "1rem" }} />
       )}
     </div>
   );
