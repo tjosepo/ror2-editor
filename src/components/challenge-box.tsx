@@ -1,8 +1,15 @@
-import React from 'react';
-import { Challenge } from '../challenges';
-import './challenge-box.scss';
+import { Challenge } from "../challenges";
+import "./challenge-box.scss";
 
-export default function ChallengeBox({ challenge, achievements, onClick }: { challenge: Challenge, achievements: String[], onClick: Function }) {
+export default function ChallengeBox({
+  challenge,
+  achievements,
+  onClick,
+}: {
+  challenge: Challenge;
+  achievements: String[];
+  onClick: Function;
+}) {
   let selected = achievements.includes(challenge.achievement);
 
   return (
@@ -11,11 +18,18 @@ export default function ChallengeBox({ challenge, achievements, onClick }: { cha
       className={`grid ${selected ? "selected" : ""}`}
       onClick={(e) => {
         onClick(!selected);
-      }}>
+      }}
+    >
       <div className="icon">
         <picture>
-          <source type="image/webp" srcSet={`/images/webp/${challenge.icon}.webp`} />
-          <img src={`/images/png/${challenge.icon}.png`} alt={`${challenge.name} icon`} />
+          <source
+            type="image/webp"
+            srcSet={`/images/webp/${challenge.icon}.webp`}
+          />
+          <img
+            src={`/images/png/${challenge.icon}.png`}
+            alt={`${challenge.name} icon`}
+          />
         </picture>
       </div>
       <div className="text">

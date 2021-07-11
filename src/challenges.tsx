@@ -152,5 +152,4 @@ export const challenges: Challenge[] = [
   { name: 'Trial of Death', description: 'Complete the Trial of Death.', unlock: 'Artifacts.TeamDeath', achievement: 'ObtainArtifactTeamDeath', icon: 'artifacts/teamdeath' },
   { name: 'Trial of Kin', description: 'Complete the Trial of Kin.', unlock: 'Artifacts.SingleMonsterType', achievement: 'ObtainArtifactSingleMonsterType', icon: 'artifacts/singlemonstertype' },
   { name: 'Trial of Chaos', description: 'Complete the Trial of Chaos.', unlock: 'Artifacts.FriendlyFire', achievement: 'ObtainArtifactFriendlyFire', icon: 'artifacts/friendlyfire' },
-
 ]

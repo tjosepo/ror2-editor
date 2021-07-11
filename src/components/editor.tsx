@@ -4,13 +4,12 @@ import ChallengeBox from "./challenge-box";
 import "./editor.scss";
 import Button from "./button";
 
-export default function Editor({
-  savedata,
-  setSavedata,
-}: {
+interface Props {
   savedata: XMLDocument;
   setSavedata: React.Dispatch<XMLDocument>;
-}) {
+}
+
+export default function Editor({ savedata, setSavedata }: Props) {
   const coins = savedata.querySelector("coins")!.innerHTML;
   const stats = savedata.querySelector("stats")!;
   const [achievements, setAchievements] = useState(

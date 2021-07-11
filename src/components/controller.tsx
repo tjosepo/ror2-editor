@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Editor from "./editor";
 import SaveExport from "./save-export";
 import SaveImport from "./save-import";
