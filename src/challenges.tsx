@@ -135,6 +135,16 @@ export const challenges: Challenge[] = [
   { name: 'Captain: Smushed', description: 'As Captain, kill the final boss using a Supply Beacon.', unlock: 'Skills.Captain.UtilityAlt1', achievement: 'CaptainSupplyDropFinale', icon: 'skills/captain/utility-alt1' },
   { name: 'Captain: Mastery', description: 'As Captain, beat the game or obliterate on Monsoon.', unlock: 'Skins.Captain.Alt1', achievement: 'CaptainClearGameMonsoon', icon: 'skins/captain/alt1' },
   
+  /* Railgunner skills */
+  { name: 'Railgunner: Marksman', description: 'As Railgunner, fire 30 consecutive sniper shots without missing a Weak Point.', unlock: 'Skills.Railgunner.SecondaryAlt1', achievement: 'RailgunnerConsecutiveWeakPoints', icon: 'skills/railgunner/marksman' },
+  { name: 'Railgunner: Annihilator', description: 'As Railgunner, deal 1,000,000 damage in one shot.', unlock: 'Skills.Railgunner.UtilityAlt1', achievement: 'RailgunnerDealMassiveDamage', icon: 'skills/railgunner/annihiliator' },
+  { name: 'Railgunner: Trickshot', description: 'As Railgunner, get 3 kills with a single Supercharge shot while airborne.', unlock: 'Skills.Railgunner.SpecialAlt1', achievement: 'RailgunnerAirborneMultiKill', icon: 'skills/railgunner/trickshot' },
+  { name: 'Railgunner: Mastery', description: 'As Railgunner, beat the game or obliterate on Monsoon.', unlock: 'Skins.RailGunner.Alt1', achievement: 'RailgunnerClearGameMonsoon', icon: 'skins/railgunner/alt1' },
+
+  /* Void Fiend skills */
+  { name: 'Dragged Below', description: 'Escape the Planetarium or complete wave 50 in Simulacrum.', unlock: 'Characters.VoidSurvivor', achievement: 'CompleteVoidEnding', icon: 'characters/voidsurvivor' },
+  { name: 'Void Fiend: Mastery', description: 'As Void Fiend, beat the game or obliterate on Monsoon.', unlock: 'Skins.VoidSurvivor.Alt1', achievement: 'VoidSurvivorClearGameMonsoon', icon: 'skins/voidsurvivor/alt1' },
+
   /* Artifacts */
   { name: 'Trial of Swarms', description: 'Complete the Trial of Swarms.', unlock: 'Artifacts.Swarms', achievement: 'ObtainArtifactSwarms', icon: 'artifacts/swarms' },
   { name: 'Trial of Honor', description: 'Complete the Trial of Honor.', unlock: 'Artifacts.EliteOnly', achievement: 'ObtainArtifactEliteOnly', icon: 'artifacts/eliteonly' },
