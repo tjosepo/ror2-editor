@@ -37,6 +37,7 @@
 
     &::before {
       content: "";
+      cursor: pointer;
       position: absolute;
       top: -8px;
       left: -8px;

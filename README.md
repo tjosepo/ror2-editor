@@ -13,7 +13,7 @@ npm run build
 ```
 You can run the development server with:
 ```
-npm start
+npm run dev
 ```
 
 ## Privacy

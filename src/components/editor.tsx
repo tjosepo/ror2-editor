@@ -38,9 +38,8 @@ export default function Editor({
 
     achievements.push(achievement);
     const achievementsAsString = achievements.join(" ");
-    savedata.querySelector(
-      "achievementsList"
-    )!.innerHTML = achievementsAsString;
+    savedata.querySelector("achievementsList")!.innerHTML =
+      achievementsAsString;
   };
 
   const removeAchievement = (achievement: string) => {
@@ -48,9 +47,8 @@ export default function Editor({
 
     achievements.splice(achievements.indexOf(achievement), 1);
     const achievementsAsString = achievements.join(" ");
-    savedata.querySelector(
-      "achievementsList"
-    )!.innerHTML = achievementsAsString;
+    savedata.querySelector("achievementsList")!.innerHTML =
+      achievementsAsString;
   };
 
   const addUnlock = (unlock: string) => {

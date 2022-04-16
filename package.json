@@ -1,41 +1,24 @@
 {
   "name": "ror2-editor",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "file-saver": "^2.0.2",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  },
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "react-scripts build && firebase deploy",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "webp": "@powershell ./scripts/convert_to_webp.ps1"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "react": "~18.0.0",
+    "react-dom": "~18.0.0"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.1",
-    "@types/node": "^14.14.37",
-    "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.3",
-    "react-scripts": "^5.0.0",
-    "sass": "^1.49.9",
-    "typescript": "^4.2.3"
+    "@types/react": "~18.0.0",
+    "@types/react-dom": "~18.0.0",
+    "@vitejs/plugin-react": "^1.3.1",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.5"
   }
 }

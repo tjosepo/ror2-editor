@@ -1,5 +1,5 @@
-import React from 'react';
-import './info.scss';
+import React from "react";
+import "./info.scss";
 
 export default function Info() {
   return (
