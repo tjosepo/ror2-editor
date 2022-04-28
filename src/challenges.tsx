@@ -102,7 +102,7 @@ export const challenges: Challenge[] = [
 
   /* Mercenary skills */
   { name: 'True Respite', description: 'Obliterate yourself at the Obelisk.', unlock: 'Characters.Mercenary', achievement: 'CompleteUnknownEnding', icon: 'characters/mercenary' },
-  { name: 'Mercenary: Ethereal', description: 'As Mercenary, perform a multikill of 20 enemies.', unlock: 'Skills.Merc.EvisProjectile', achievement: 'MercCompleteTrialWithFullHealth', icon: 'skills/merc/evisprojectile' },
+  { name: 'Mercenary: Ethereal', description: 'As Mercenary, complete a Prismatic Trial without falling below 100% health.', unlock: 'Skills.Merc.EvisProjectile', achievement: 'MercCompleteTrialWithFullHealth', icon: 'skills/merc/evisprojectile' },
   { name: 'Mercenary: Flash of Blades', description: 'As Mercenary, use 20 abilities in 10 seconds.', unlock: 'Skills.Merc.FocusedAssault', achievement: 'MercXSkillsInYSeconds', icon: 'skills/merc/focused-assault' },
   { name: 'Mercenary: Demon of the Skies', description: 'As Mercenary, kill 15 enemies before touching the ground.', unlock: 'Skills.Merc.Uppercut', achievement: 'MercDontTouchGround', icon: 'skills/merc/uppercut' },
   { name: 'Mercenary: Mastery', description: 'As Mercenary, beat the game or obliterate on Monsoon.', unlock: 'Skins.Merc.Alt1', achievement: 'MercClearGameMonsoon', icon: 'skins/merc/alt1' },
