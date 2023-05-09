@@ -19,4 +19,4 @@ steps:
       directory: 'dist'
       projectName: 'demo'
       apiToken: '$(CLOUDFLARE_API_TOKEN)'
-      accountId: ''
+      accountId: '7ecebcc17ce0ba5fe360c68aaad14501'
