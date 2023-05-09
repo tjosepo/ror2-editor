@@ -9,9 +9,9 @@ steps:
 
 - script: npm run build
 
-- script: npx wrangler pages publish dist --project-name demo --branch $(Build.SourceBranchName) --commit-hash $(Build.SourceVersion) --commit-message "$(Build.SourceVersionMessage)"
-  env:
-    CLOUDFLARE_API_TOKEN: $(CLOUDFLARE_API_TOKEN)
+#- script: npx wrangler pages publish dist --project-name demo --branch $(Build.SourceBranchName) --commit-hash $(Build.SourceVersion) --commit-message "$(Build.SourceVersionMessage)"
+#  env:
+#    CLOUDFLARE_API_TOKEN: $(CLOUDFLARE_API_TOKEN)
 
 - task: CloudflarePagesDeploy@0
   inputs:
