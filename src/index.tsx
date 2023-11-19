@@ -1,23 +1,17 @@
-import React from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Controller from "./components/controller";
-import "./styles.scss";
+// import Controller from "./components/controller";
+import "./index.css";
 import Info from "./components/info";
 
 function App() {
   return (
-    <React.StrictMode>
-      <div
-        style={{
-          height: "100%",
-          display: "grid",
-          gridTemplateRows: "1fr min-content",
-        }}
-      >
-        <Controller />
+    <StrictMode>
+      <div className="h-full grid grid-rows[1fr min-content]">
+        {/* <Controller /> */}
         <Info />
       </div>
-    </React.StrictMode>
+    </StrictMode>
   );
 }
 

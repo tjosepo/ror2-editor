@@ -1,7 +1,25 @@
-import React, { useState } from "react";
+import React, { createContext, useState, useSyncExternalStore } from "react";
 import Editor from "./editor";
 import SaveExport from "./save-export";
 import SaveImport from "./save-import";
+
+const savedata: XMLDocument | undefined = undefined;
+
+function subscribe(callback: () => void) {
+  window.addEventListener("save-update", callback);
+  return () => window.removeEventListener("save-update", callback);
+}
+
+function getSnapshot<T = any>(selector?: (save: XMLDocument) => T): () => T | undefined {
+  if (!savedata) return () => undefined;
+  if (!selector) return () => undefined;
+  return () => selector(savedata);
+}
+
+function useSaveData<T = any>(selector: (save: XMLDocument) => T) {
+  const savedata = useSyncExternalStore(subscribe, getSnapshot(selector));
+}
+
 
 export default function Controller() {
   const [filename, setFilename] = useState<string>("");

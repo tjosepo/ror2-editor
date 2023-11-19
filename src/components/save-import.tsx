@@ -35,7 +35,7 @@ export default function SaveImport({ setFilename, setSavedata, style }: Props) {
     reader.readAsText(savefile);
   };
 
-  const click = () => {
+  const handleClick = () => {
     const input = inputRef.current as HTMLInputElement;
     input.click();
   };
@@ -58,7 +58,7 @@ export default function SaveImport({ setFilename, setSavedata, style }: Props) {
         onChange={(e) => _import(e.target.files)}
         ref={inputRef}
       />
-      <Button style={style} onClick={(e) => click()}>
+      <Button style={style} onClick={handleClick}>
         Import savefile
       </Button>
       <div style={{ textAlign: "center" }}>
