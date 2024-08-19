@@ -127,14 +127,14 @@ export const challenges: Challenge[] = [
   { name: 'Acrid: Bad Medecine', description: 'As Acrid, land the final blow on a Scavenger.', unlock: 'Skills.Croco.CrocoBite', achievement: 'CrocoKillScavenger', icon: 'skills/croco/crocobite' },
   { name: 'Acrid: Easy Prey', description: 'As Acrid, land the killing blow on 50 total enemies that have 1 hit point left.', unlock: 'Skills.Croco.PassivePoisonLethal', achievement: 'CrocoKillWeakEnemiesMilestone', icon: 'skills/croco/passivepoisonlethal' },
   { name: 'Acrid: Mastery', description: 'As Acrid, beat the game or obliterate on Monsoon.', unlock: 'Skins.Croco.Alt1', achievement: 'CrocoClearGameMonsoon', icon: 'skins/croco/alt1' },
-  
+
   /* Captain skills */
   { name: 'Washed Away', description: 'Beat the game.', unlock: 'Characters.Captain', achievement: 'CompleteMainEnding', icon: 'characters/captain' },
   { name: 'Captain: Wanderlust', description: 'As Captain, visit 10 different environments in a single run', unlock: 'Skills.Captain.CaptainSupplyDropEquipmentRestock', achievement: 'CaptainVisitSeveralStages', icon: 'skills/captain/captainsupplydropequipmentrestock' },
   { name: 'Captain: Worth Every Penny', description: 'As Captain, repair and recruit a TC-280 Prototype.', unlock: 'Skills.Captain.CaptainSupplyDropHacking', achievement: 'CaptainBuyMegaDrone', icon: 'skills/captain/captainsupplydrophacking' },
   { name: 'Captain: Smushed', description: 'As Captain, kill the final boss using a Supply Beacon.', unlock: 'Skills.Captain.UtilityAlt1', achievement: 'CaptainSupplyDropFinale', icon: 'skills/captain/utility-alt1' },
   { name: 'Captain: Mastery', description: 'As Captain, beat the game or obliterate on Monsoon.', unlock: 'Skins.Captain.Alt1', achievement: 'CaptainClearGameMonsoon', icon: 'skins/captain/alt1' },
-  
+
   /* Railgunner skills */
   { name: 'Railgunner: Marksman', description: 'As Railgunner, fire 30 consecutive sniper shots without missing a Weak Point.', unlock: 'Skills.Railgunner.SecondaryAlt1', achievement: 'RailgunnerConsecutiveWeakPoints', icon: 'skills/railgunner/marksman' },
   { name: 'Railgunner: Annihilator', description: 'As Railgunner, deal 1,000,000 damage in one shot.', unlock: 'Skills.Railgunner.UtilityAlt1', achievement: 'RailgunnerDealMassiveDamage', icon: 'skills/railgunner/annihiliator' },
@@ -146,21 +146,22 @@ export const challenges: Challenge[] = [
   { name: 'Void Fiend: Mastery', description: 'As Void Fiend, beat the game or obliterate on Monsoon.', unlock: 'Skins.VoidSurvivor.Alt1', achievement: 'VoidSurvivorClearGameMonsoon', icon: 'skins/voidsurvivor/alt1' },
 
   /* Artifacts */
-  { name: 'Trial of Swarms', description: 'Complete the Trial of Swarms.', unlock: 'Artifacts.Swarms', achievement: 'ObtainArtifactSwarms', icon: 'artifacts/swarms' },
-  { name: 'Trial of Honor', description: 'Complete the Trial of Honor.', unlock: 'Artifacts.EliteOnly', achievement: 'ObtainArtifactEliteOnly', icon: 'artifacts/eliteonly' },
   { name: 'Trial of Spite', description: 'Complete the Trial of Spite.', unlock: 'Artifacts.Bomb', achievement: 'ObtainArtifactBomb', icon: 'artifacts/bomb' },
   { name: 'Trial of Command', description: 'Complete the Trial of Command.', unlock: 'Artifacts.Command', achievement: 'ObtainArtifactCommand', icon: 'artifacts/command' },
+  { name: 'Trial of Delusion', description: 'Complete the Trial of Delusion.', unlock: 'Artifacts.Delusion', achievement: 'ObtainArtifactDelusion', icon: 'artifacts/delusion' },
+  { name: 'Trial of Devotion', description: 'Complete the Trial of Devotion.', unlock: 'Artifacts.Devotion', achievement: 'ObtainArtifactDevotion', icon: 'artifacts/devotion' },
+  { name: 'Trial of Honor', description: 'Complete the Trial of Honor.', unlock: 'Artifacts.EliteOnly', achievement: 'ObtainArtifactEliteOnly', icon: 'artifacts/eliteonly' },
   { name: 'Trial of Enigma', description: 'Complete the Trial of Enigma.', unlock: 'Artifacts.Enigma', achievement: 'ObtainArtifactEnigma', icon: 'artifacts/enigma' },
+  { name: 'Trial of Chaos', description: 'Complete the Trial of Chaos.', unlock: 'Artifacts.FriendlyFire', achievement: 'ObtainArtifactFriendlyFire', icon: 'artifacts/friendlyfire' },
   { name: 'Trial of Glass', description: 'Complete the Trial of Glass.', unlock: 'Artifacts.Glass', achievement: 'ObtainArtifactGlass', icon: 'artifacts/glass' },
   { name: 'Trial of Dissonance', description: 'Complete the Trial of Dissonance.', unlock: 'Artifacts.MixEnemy', achievement: 'ObtainArtifactMixEnemy', icon: 'artifacts/mixenemy' },
   { name: 'Trial of Evolution', description: 'Complete the Trial of Evolution.', unlock: 'Artifacts.MonsterTeamGainsItems', achievement: 'ObtainArtifactMonsterTeamGainsItems', icon: 'artifacts/monsterteamgainsitems' },
   { name: 'Trial of Metamorphosis', description: 'Complete the Trial of Metamorphosis.', unlock: 'Artifacts.RandomSurvivorOnRespawn', achievement: 'ObtainArtifactRandomSurvivorOnRespawn', icon: 'artifacts/randomsurvivoronrespawn' },
   { name: 'Trial of Sacrifice', description: 'Complete the Trial of Sacrifice.', unlock: 'Artifacts.Sacrifice', achievement: 'ObtainArtifactSacrifice', icon: 'artifacts/sacrifice' },
   { name: 'Trial of Vengeance', description: 'Complete the Trial of Vengeance.', unlock: 'Artifacts.ShadowClone', achievement: 'ObtainArtifactShadowClone', icon: 'artifacts/shadowclone' },
-  { name: 'Trial of Soul', description: 'Complete the Trial of Soul.', unlock: 'Artifacts.WispOnDeath', achievement: 'ObtainArtifactWispOnDeath', icon: 'artifacts/wispondeath' },
-  { name: 'Trial of Frailty', description: 'Complete the Trial of Frailty.', unlock: 'Artifacts.WeakAssKnees', achievement: 'ObtainArtifactWeakAssKnees', icon: 'artifacts/weakassknees' },
-  { name: 'Trial of Death', description: 'Complete the Trial of Death.', unlock: 'Artifacts.TeamDeath', achievement: 'ObtainArtifactTeamDeath', icon: 'artifacts/teamdeath' },
   { name: 'Trial of Kin', description: 'Complete the Trial of Kin.', unlock: 'Artifacts.SingleMonsterType', achievement: 'ObtainArtifactSingleMonsterType', icon: 'artifacts/singlemonstertype' },
-  { name: 'Trial of Chaos', description: 'Complete the Trial of Chaos.', unlock: 'Artifacts.FriendlyFire', achievement: 'ObtainArtifactFriendlyFire', icon: 'artifacts/friendlyfire' },
-
+  { name: 'Trial of Swarms', description: 'Complete the Trial of Swarms.', unlock: 'Artifacts.Swarms', achievement: 'ObtainArtifactSwarms', icon: 'artifacts/swarms' },
+  { name: 'Trial of Death', description: 'Complete the Trial of Death.', unlock: 'Artifacts.TeamDeath', achievement: 'ObtainArtifactTeamDeath', icon: 'artifacts/teamdeath' },
+  { name: 'Trial of Frailty', description: 'Complete the Trial of Frailty.', unlock: 'Artifacts.WeakAssKnees', achievement: 'ObtainArtifactWeakAssKnees', icon: 'artifacts/weakassknees' },
+  { name: 'Trial of Soul', description: 'Complete the Trial of Soul.', unlock: 'Artifacts.WispOnDeath', achievement: 'ObtainArtifactWispOnDeath', icon: 'artifacts/wispondeath' },
 ]
