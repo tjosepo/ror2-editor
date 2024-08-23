@@ -3,7 +3,7 @@ import Editor from "./editor";
 import SaveExport from "./save-export";
 import SaveImport from "./save-import";
 
-export default function Controller() {
+export default function Controller(): React.JSX.Element {
   const [filename, setFilename] = useState<string>("");
   const [savedata, setSavedata] = useState<XMLDocument>();
 
@@ -19,8 +19,8 @@ export default function Controller() {
       <p>
         Your savefile should be located at:{" "}
         <span style={{ color: "#E3E9EB" }}>
-          C:\Program Files
-          (x86)\Steam\userdata\[Number]\632360\remote\UserProfiles
+          C:\Program
+          Files(x86)\Steam\userdata\[Number]\632360\remote\UserProfiles
         </span>
       </p>
       {savedata ? (
@@ -30,16 +30,14 @@ export default function Controller() {
             filename={filename}
             savedata={savedata}
           />
-          <Editor savedata={savedata} setSavedata={setSavedata} />
+          <Editor savedata={savedata} />
         </>
       ) : (
-        <>
-          <SaveImport
-            style={{ width: "100%", marginBottom: "1rem" }}
-            setFilename={setFilename}
-            setSavedata={setSavedata}
-          />
-        </>
+        <SaveImport
+          style={{ width: "100%", marginBottom: "1rem" }}
+          onFilenameChange={setFilename}
+          onSavedataChange={setSavedata}
+        />
       )}
     </div>
   );

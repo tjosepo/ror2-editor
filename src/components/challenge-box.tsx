@@ -1,23 +1,30 @@
 import React from "react";
 import { Challenge } from "../challenges";
+
 import "./challenge-box.scss";
+
+interface Props {
+  challenge: Challenge;
+  achievements: string[];
+  onToggle: (challenge: Challenge, selected: boolean) => void;
+}
 
 export default function ChallengeBox({
   challenge,
   achievements,
-  onClick,
-}: {
-  challenge: Challenge;
-  achievements: String[];
-  onClick: Function;
-}) {
-  let selected = achievements.includes(challenge.achievement);
+  onToggle,
+}: Props): React.JSX.Element {
+  const selected = achievements.includes(challenge.achievement);
+
+  const handleToggle = (): void => {
+    onToggle(challenge, !selected);
+  };
 
   return (
     <button
       type="button"
       className={`grid ${selected ? "selected" : ""}`}
-      onClick={() => onClick(!selected)}
+      onClick={handleToggle}
     >
       <div className="icon">
         <picture>
