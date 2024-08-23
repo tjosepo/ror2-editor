@@ -14,7 +14,7 @@ export default function Editor({
   const coins = savedata.querySelector("coins")!.innerHTML;
   const stats = savedata.querySelector("stats")!;
   const [achievements, setAchievements] = useState(
-    savedata.querySelector("achievementsList")!.innerHTML.split(" ")
+    savedata.querySelector("achievementsList")!.innerHTML.split(" "),
   );
 
   const changeCoins = (value: string) => {
@@ -110,30 +110,30 @@ export default function Editor({
         break;
       case "The Demons And The Crabs":
         stats.querySelector(
-          'stat[name="suicideHermitCrabsAchievementProgress"]'
+          'stat[name="suicideHermitCrabsAchievementProgress"]',
         )!.textContent = "0";
         break;
       case "Cosmic Explorer":
         stats.querySelector(
-          'stat[name="totalTimesVisited.bazaar"]'
+          'stat[name="totalTimesVisited.bazaar"]',
         )!.textContent = "0";
         stats.querySelector(
-          'stat[name="totalTimesVisited.arena"]'
+          'stat[name="totalTimesVisited.arena"]',
         )!.textContent = "0";
         stats.querySelector(
-          'stat[name="totalTimesVisited.goldshores"]'
+          'stat[name="totalTimesVisited.goldshores"]',
         )!.textContent = "0";
         stats.querySelector(
-          'stat[name="totalTimesVisited.mysteryspace"]'
+          'stat[name="totalTimesVisited.mysteryspace"]',
         )!.textContent = "0"; // not sure what mysterypace is...
         stats.querySelector(
-          'stat[name="totalTimesVisited.artifactworld"]'
+          'stat[name="totalTimesVisited.artifactworld"]',
         )!.textContent = "0";
         break;
       case "Warm For Life":
         stats.querySelector('stat[name="totalBurnDeaths"]')!.textContent = "0";
         stats.querySelector(
-          'stat[name="totalDeathsWhileBurning"]'
+          'stat[name="totalDeathsWhileBurning"]',
         )!.textContent = "0";
         break;
       case "Mechanic":

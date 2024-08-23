@@ -5,13 +5,16 @@
 It is still a work in progress, so feel free to contribute by submitting issues or by submitting your own code.
 
 ## Building locally
+
 Clone the repo, and:
 
 ```
 npm install
 npm run build
 ```
+
 You can run the development server with:
+
 ```
 npm run dev
 ```

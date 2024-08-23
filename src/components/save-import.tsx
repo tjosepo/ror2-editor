@@ -28,7 +28,7 @@ export default function SaveImport({ setFilename, setSavedata, style }: Props) {
       const savedataAsString = reader.result as string;
       const savedata = parser.parseFromString(
         savedataAsString,
-        "text/xml"
+        "text/xml",
       ) as XMLDocument;
       callback(savedata);
     });
