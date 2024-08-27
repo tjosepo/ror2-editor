@@ -1,10 +1,12 @@
 import React from "react";
+
 import { createRoot } from "react-dom/client";
 import Controller from "./components/controller";
-import "./styles.scss";
 import Info from "./components/info";
 
-function App() {
+import "./styles.scss";
+
+function App(): React.JSX.Element {
   return (
     <React.StrictMode>
       <div
@@ -21,6 +23,4 @@ function App() {
   );
 }
 
-const container = document.getElementById("root");
-const root = createRoot(container!);
-root.render(<App />);
+createRoot(document.getElementById("root")!).render(<App />);

@@ -2,13 +2,22 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
+
 "on":
-  push:
-    branches:
-      - main
+  # This workflow can be run after CI workflow is completed successfully on main branch
+  # @see https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#workflow_run
+  # @see https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#running-a-workflow-based-on-the-conclusion-of-another-workflow
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+  workflow_dispatch:
+
 jobs:
-  build_and_deploy:
+  on-success:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
     steps:
       - uses: actions/checkout@v2
       - run: npm install
@@ -19,3 +28,9 @@ jobs:
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_RISKOFRAIN2_SAVE_EDITOR }}"
           channelId: live
           projectId: riskofrain2-save-editor
+
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'CI failed. Deploy won't be executed'

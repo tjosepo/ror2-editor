@@ -4,24 +4,23 @@ import ChallengeBox from "./challenge-box";
 import "./editor.scss";
 import Button from "./button";
 
-export default function Editor({
-  savedata,
-  setSavedata,
-}: {
+interface Props {
   savedata: XMLDocument;
-  setSavedata: React.Dispatch<XMLDocument>;
-}) {
+}
+
+export default function Editor({ savedata }: Props): React.JSX.Element {
   const coins = savedata.querySelector("coins")!.innerHTML;
   const stats = savedata.querySelector("stats")!;
+
   const [achievements, setAchievements] = useState(
-    savedata.querySelector("achievementsList")!.innerHTML.split(" ")
+    savedata.querySelector("achievementsList")!.innerHTML.split(" "),
   );
 
-  const changeCoins = (value: string) => {
+  const changeCoins = (value: string): void => {
     savedata.querySelector("coins")!.innerHTML = value;
   };
 
-  const changeChallenge = (challenge: Challenge, checked: boolean) => {
+  const changeChallenge = (challenge: Challenge, checked: boolean): void => {
     if (checked) {
       addAchievement(challenge.achievement);
       addUnlock(challenge.unlock);
@@ -33,7 +32,7 @@ export default function Editor({
     setAchievements([...achievements]);
   };
 
-  const addAchievement = (achievement: string) => {
+  const addAchievement = (achievement: string): void => {
     if (achievements.includes(achievement)) return;
 
     achievements.push(achievement);
@@ -42,7 +41,7 @@ export default function Editor({
       achievementsAsString;
   };
 
-  const removeAchievement = (achievement: string) => {
+  const removeAchievement = (achievement: string): void => {
     if (!achievements.includes(achievement)) return;
 
     achievements.splice(achievements.indexOf(achievement), 1);
@@ -51,35 +50,32 @@ export default function Editor({
       achievementsAsString;
   };
 
-  const addUnlock = (unlock: string) => {
+  const addUnlock = (unlock: string): void => {
     if (findUnlock(unlock)) return;
     const unlockElement = createUnlock(unlock);
     stats.appendChild(unlockElement);
   };
 
-  const removeUnlock = (unlock: string) => {
+  const removeUnlock = (unlock: string): void => {
     const unlockElement = findUnlock(unlock);
     if (!unlockElement) return;
     stats.removeChild(unlockElement);
   };
 
-  const findUnlock = (unlock: string) => {
+  const findUnlock = (unlock: string): Element | undefined => {
     const unlocks = stats.querySelectorAll("unlock");
-    let unlockElement: Element | undefined = undefined;
-    unlocks.forEach((element) => {
-      if (!unlockElement && element.textContent === unlock)
-        unlockElement = element;
-    });
-    return unlockElement;
+    return Array.from(unlocks).find(
+      (element) => element.textContent === unlock,
+    );
   };
 
-  const createUnlock = (unlock: string) => {
+  const createUnlock = (unlock: string): HTMLElement => {
     const unlockElement = document.createElement("unlock");
     unlockElement.textContent = unlock;
     return unlockElement;
   };
 
-  const removeStatsRequirements = (name: string) => {
+  const removeStatsRequirements = (name: string): void => {
     switch (name) {
       case "The Basics":
         // TODO: Find a way to only overwrite the white pickups.
@@ -110,30 +106,30 @@ export default function Editor({
         break;
       case "The Demons And The Crabs":
         stats.querySelector(
-          'stat[name="suicideHermitCrabsAchievementProgress"]'
+          'stat[name="suicideHermitCrabsAchievementProgress"]',
         )!.textContent = "0";
         break;
       case "Cosmic Explorer":
         stats.querySelector(
-          'stat[name="totalTimesVisited.bazaar"]'
+          'stat[name="totalTimesVisited.bazaar"]',
         )!.textContent = "0";
         stats.querySelector(
-          'stat[name="totalTimesVisited.arena"]'
+          'stat[name="totalTimesVisited.arena"]',
         )!.textContent = "0";
         stats.querySelector(
-          'stat[name="totalTimesVisited.goldshores"]'
+          'stat[name="totalTimesVisited.goldshores"]',
         )!.textContent = "0";
         stats.querySelector(
-          'stat[name="totalTimesVisited.mysteryspace"]'
+          'stat[name="totalTimesVisited.mysteryspace"]',
         )!.textContent = "0"; // not sure what mysterypace is...
         stats.querySelector(
-          'stat[name="totalTimesVisited.artifactworld"]'
+          'stat[name="totalTimesVisited.artifactworld"]',
         )!.textContent = "0";
         break;
       case "Warm For Life":
         stats.querySelector('stat[name="totalBurnDeaths"]')!.textContent = "0";
         stats.querySelector(
-          'stat[name="totalDeathsWhileBurning"]'
+          'stat[name="totalDeathsWhileBurning"]',
         )!.textContent = "0";
         break;
       case "Mechanic":
@@ -209,7 +205,7 @@ export default function Editor({
     }
   };
 
-  const unlockAll = () => {
+  const unlockAll = (): void => {
     challenges.forEach((challenge) => changeChallenge(challenge, true));
   };
 
@@ -237,7 +233,7 @@ export default function Editor({
         }}
       >
         <h2>Challenge</h2>
-        <Button onClick={(e) => unlockAll()}>Unlock all</Button>
+        <Button onClick={unlockAll}>Unlock all</Button>
       </div>
 
       <div className="challenge-grid">
@@ -246,9 +242,7 @@ export default function Editor({
             key={challenge.achievement}
             challenge={challenge}
             achievements={achievements}
-            onClick={(selected: boolean) =>
-              changeChallenge(challenge, selected)
-            }
+            onToggle={changeChallenge}
           />
         ))}
       </div>

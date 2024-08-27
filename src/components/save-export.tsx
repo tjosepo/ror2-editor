@@ -8,23 +8,22 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-export default function SaveExport({ filename, savedata, style }: Props) {
-  const _export = () => {
-    const savefile = getSavefile(savedata);
-    saveAs(savefile, filename);
-  };
-
-  const getSavefile = (savedata: XMLDocument) => {
+export default function SaveExport({
+  filename,
+  savedata,
+  style,
+}: Props): React.JSX.Element {
+  const handleExport = (): void => {
     const serializer = new XMLSerializer();
     const savedataAsString = serializer.serializeToString(savedata);
     const savefile = new Blob([savedataAsString], {
       type: "text/plain;charset=utf-8",
     });
-    return savefile;
+    saveAs(savefile, filename);
   };
 
   return (
-    <Button style={style} onClick={(e) => _export()}>
+    <Button style={style} onClick={handleExport}>
       Export savefile
     </Button>
   );
