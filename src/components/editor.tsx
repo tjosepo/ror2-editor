@@ -23,10 +23,10 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
   const changeChallenge = (challenge: Challenge, checked: boolean): void => {
     if (checked) {
       addAchievement(challenge.achievement);
-      addUnlock(challenge.unlock);
+      challenge.unlocks.forEach(addUnlock);
     } else {
       removeAchievement(challenge.achievement);
-      removeUnlock(challenge.unlock);
+      challenge.unlocks.forEach(removeUnlock);
       removeStatsRequirements(challenge.name);
     }
     setAchievements([...achievements]);
