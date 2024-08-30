@@ -145,7 +145,7 @@ export const challenges: Challenge[] = [
   { name: 'Captain: Worth Every Penny', description: 'As Captain, repair and recruit a TC-280 Prototype.', unlocks: ['Skills.Captain.CaptainSupplyDropHacking'], achievement: 'CaptainBuyMegaDrone', icon: 'skills/captain/captainsupplydrophacking' },
   { name: 'Captain: Smushed', description: 'As Captain, kill the final boss using a Supply Beacon.', unlocks: ['Skills.Captain.UtilityAlt1'], achievement: 'CaptainSupplyDropFinale', icon: 'skills/captain/utility-alt1' },
   { name: 'Captain: Mastery', description: 'As Captain, beat the game or obliterate on Monsoon.', unlocks: ['Skins.Captain.Alt1'], achievement: 'CaptainClearGameMonsoon', icon: 'skins/captain/alt1' },
-  { name: 'Acrid: Cleared Prime Meridian', description: 'As Acrid, complete the Event on Prime Meridian.', unlocks: ['Skins.Captain.Alt2'], achievement: 'CaptainClearMeridianEvent', icon: 'skins/captain/alt2' },
+  { name: 'Captain: Cleared Prime Meridian', description: 'As Captain, complete the Event on Prime Meridian.', unlocks: ['Skins.Captain.Alt2'], achievement: 'CaptainClearMeridianEvent', icon: 'skins/captain/alt2' },
 
   /* Railgunner skills */
   { name: 'Railgunner: Marksman', description: 'As Railgunner, fire 30 consecutive sniper shots without missing a Weak Point.', unlocks: ['Skills.Railgunner.SecondaryAlt1'], achievement: 'RailgunnerConsecutiveWeakPoints', icon: 'skills/railgunner/marksman' },
@@ -157,7 +157,7 @@ export const challenges: Challenge[] = [
   /* Void Fiend skills */
   { name: 'Dragged Below', description: 'Escape the Planetarium or complete wave 50 in Simulacrum.', unlocks: ['Characters.VoidSurvivor'], achievement: 'CompleteVoidEnding', icon: 'characters/voidsurvivor' },
   { name: 'Void Fiend: Mastery', description: 'As Void Fiend, beat the game or obliterate on Monsoon.', unlocks: ['Skins.VoidSurvivor.Alt1'], achievement: 'VoidSurvivorClearGameMonsoon', icon: 'skins/voidsurvivor/alt1' },
-  { name: 'Void Fiend: Cleared Prime Meridian', description: 'As 「V??oid Fiend』, complete the Event on Prime Meridian.', unlocks: ['Skins.VoidSurvivor.Alt2'], achievement: 'VoidSurvivorClearMeridianEvent', icon: 'skins/voidsurvivor/alt2' },
+  { name: 'Void Fiend: Cleared Prime Meridian', description: 'As Void Fiend, complete the Event on Prime Meridian.', unlocks: ['Skins.VoidSurvivor.Alt2'], achievement: 'VoidSurvivorClearMeridianEvent', icon: 'skins/voidsurvivor/alt2' },
 
   /* Seeker skills */
   { name: 'Seeker: Airborne Souls', description: 'As Seeker, hit three or more airborne enemies with a single use of the exploding third hit of Spirit Punch.', unlocks: ['Skills.Seeker.SoulSearch'], achievement: 'SeekerAirMultiHit', icon: 'skills/seeker/soulsearch' },
