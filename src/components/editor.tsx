@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Challenge, challenges } from "../challenges";
+import { Challenge, UnlockType, challenges } from "../challenges";
+import { ChallengeFilter, ChallengeFilterCategory, ChallengeFilterType, challengeFilterCategories, challengeFilters } from "../challenge-filters";
 import ChallengeBox from "./challenge-box";
+import ChallengeFilterBox from "./challenge-filter-box";
 import "./editor.scss";
 import Button from "./button";
+import ChallengeFilterCategoryGrid from "./challenge-filter-category-grid";
 
 interface Props {
   savedata: XMLDocument;
@@ -15,6 +18,8 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
   const [achievements, setAchievements] = useState(
     savedata.querySelector("achievementsList")!.innerHTML.split(" "),
   );
+
+  const [activeFilters, setActiveFilters] = useState([] as ChallengeFilter[]);
 
   const changeCoins = (value: string): void => {
     savedata.querySelector("coins")!.innerHTML = value;
@@ -206,7 +211,63 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
   };
 
   const unlockAll = (): void => {
-    challenges.forEach((challenge) => changeChallenge(challenge, true));
+    challenges.forEach(
+      (challenge) => changeChallenge(challenge, true)
+    );
+  };
+
+  const filterChallenges = (challenges: Challenge[]): Challenge[] => {
+    if (activeFilters.length === 0) {
+      return challenges;
+    } else {
+      return challenges.filter(
+        (challenge: Challenge) => activeFilters.some(
+          (challengeFilter: ChallengeFilter) => {
+            switch (challengeFilter.type) {
+              case ChallengeFilterType.ItemRarity:
+                return challenge.unlockType === UnlockType.Item && challenge.rarity === challengeFilter.target;
+              case ChallengeFilterType.Character:
+                return (challenge.unlockType === UnlockType.Character || challenge.unlockType === UnlockType.Skill || challenge.unlockType === UnlockType.Skin) && challenge.character === challengeFilter.target;
+              case ChallengeFilterType.Artifact:
+                return challenge.unlockType === UnlockType.Artifact;
+              case ChallengeFilterType.DLCType:
+                return challenge.dlc === challengeFilter.target;
+              /*case ChallengeFilterType.VisualGap:
+                return true;*/
+            }
+          }
+        )
+      );
+    }
+  };
+
+  const changeCategoryFilter = (category: ChallengeFilterCategory, checked: boolean): void => {
+    category.filters.forEach(
+      (categoryFilter: ChallengeFilter) => changeFilter(categoryFilter, checked, false)
+    );
+    setActiveFilters([...activeFilters]);
+  };
+
+  const changeFilter = (challengeFilter: ChallengeFilter, checked: boolean, skipSettingState: boolean = false): void => {
+    if (checked) {
+      if (activeFilters.includes(challengeFilter)) {
+        return;
+      }
+
+      activeFilters.push(challengeFilter);
+    } else {
+      const filterIndex = activeFilters.indexOf(challengeFilter);
+
+      if (filterIndex === -1) {
+        return;
+      }
+
+      activeFilters.splice(filterIndex, 1);
+    }
+
+    if (!skipSettingState) {
+      setActiveFilters([...activeFilters]);
+    }
   };
 
   return (
@@ -229,15 +290,25 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          marginBottom: "1rem",
         }}
       >
         <h2>Challenge</h2>
         <Button onClick={unlockAll}>Unlock all</Button>
       </div>
+      <div>
+        {challengeFilterCategories.map((category: ChallengeFilterCategory) => (
+          <ChallengeFilterCategoryGrid
+            key={category.name}
+            category={category}
+            activeFilters={activeFilters}
+            onToggle={changeCategoryFilter}
+            changeFilter={changeFilter}
+          />
+        ))}
+      </div>
 
       <div className="challenge-grid">
-        {challenges.map((challenge) => (
+        {filterChallenges(challenges).map((challenge) => (
           <ChallengeBox
             key={challenge.achievement}
             challenge={challenge}

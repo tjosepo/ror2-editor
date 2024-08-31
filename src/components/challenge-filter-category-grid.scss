@@ -1,0 +1,12 @@
+.category-filter-grid {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  margin-bottom: 8px;
+
+  .category-checkbox {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+  }
+}
