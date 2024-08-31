@@ -24,12 +24,8 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
     savedata.querySelector("achievementsList")!.innerHTML.split(" "),
   );
 
-  const [activeT1Filters, setActiveT1Filters] = useState(
-    [] as ChallengeFilter[],
-  );
-  const [activeT2Filters, setActiveT2Filters] = useState(
-    [] as ChallengeFilter[],
-  );
+  const [activeT1Filters, setActiveT1Filters] = useState<ChallengeFilter[]>([]);
+  const [activeT2Filters, setActiveT2Filters] = useState<ChallengeFilter[]>([]);
 
   const changeCoins = (value: string): void => {
     savedata.querySelector("coins")!.innerHTML = value;
@@ -224,30 +220,11 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
     challenges.forEach((challenge) => changeChallenge(challenge, true));
   };
 
-  const changeCategoryFilter = (
-    category: ChallengeFilterCategory,
-    checked: boolean,
-    activeFilters: ChallengeFilter[],
-    setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>,
-  ): void => {
-    category.filters.forEach((categoryFilter: ChallengeFilter) =>
-      changeFilter(
-        categoryFilter,
-        checked,
-        activeFilters,
-        setActiveFilters,
-        true,
-      ),
-    );
-    setActiveFilters([...activeFilters]);
-  };
-
   const changeFilter = (
     challengeFilter: ChallengeFilter,
     checked: boolean,
     activeFilters: ChallengeFilter[],
     setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>,
-    skipSettingState: boolean = false,
   ): void => {
     if (checked) {
       if (activeFilters.includes(challengeFilter)) {
@@ -265,9 +242,7 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
       activeFilters.splice(filterIndex, 1);
     }
 
-    if (!skipSettingState) {
-      setActiveFilters([...activeFilters]);
-    }
+    setActiveFilters([...activeFilters]);
   };
 
   // Filter tier 1 first, then tier 2 2nd
@@ -310,7 +285,6 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
             category={category}
             activeFilters={activeT1Filters}
             setActiveFilters={setActiveT1Filters}
-            onToggle={changeCategoryFilter}
             changeFilter={changeFilter}
           />
         ))}
@@ -321,7 +295,6 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
             category={category}
             activeFilters={activeT2Filters}
             setActiveFilters={setActiveT2Filters}
-            onToggle={changeCategoryFilter}
             changeFilter={changeFilter}
             tier1FilterResults={challengesFilteredT1}
           />

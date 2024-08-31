@@ -9,12 +9,6 @@ interface Props {
   category: ChallengeFilterCategory;
   activeFilters: ChallengeFilter[];
   setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>;
-  onToggle: (
-    category: ChallengeFilterCategory,
-    selected: boolean,
-    activeFilters: ChallengeFilter[],
-    setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>,
-  ) => void;
   changeFilter: (
     challengeFilter: ChallengeFilter,
     checked: boolean,
@@ -28,7 +22,6 @@ export default function ChallengeCategoryGrid({
   category,
   activeFilters,
   setActiveFilters,
-  onToggle,
   changeFilter,
   tier1FilterResults,
 }: Props): React.JSX.Element {
@@ -39,11 +32,13 @@ export default function ChallengeCategoryGrid({
     (categoryFilter: ChallengeFilter) => activeFilters.includes(categoryFilter),
   );
 
-  const handleToggle = (): void => {
-    onToggle(category, !allSelected, activeFilters, setActiveFilters);
+  const handleToggleAll = (): void => {
+    for (const filter of category.filters) {
+      changeFilter(filter, !allSelected, activeFilters, setActiveFilters);
+    }
   };
 
-  const onChildToggle = (
+  const handleToggle = (
     challengeFilter: ChallengeFilter,
     selected: boolean,
   ): void => {
@@ -55,7 +50,7 @@ export default function ChallengeCategoryGrid({
       <button
         className={`btn category-checkbox ${allSelected ? "selected" : someSelected ? "indeterminate" : ""}`}
         type="button"
-        onClick={handleToggle}
+        onClick={handleToggleAll}
         title={category.name}
       />
       {category.filters.map((challengeFilter: ChallengeFilter) => (
@@ -63,7 +58,7 @@ export default function ChallengeCategoryGrid({
           key={challengeFilter.name}
           challengeFilter={challengeFilter}
           activeFilters={activeFilters}
-          onToggle={onChildToggle}
+          onToggle={handleToggle}
           tier1FilterResults={tier1FilterResults}
         />
       ))}
