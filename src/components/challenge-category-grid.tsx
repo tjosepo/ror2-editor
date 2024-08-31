@@ -1,7 +1,7 @@
 import React from "react";
-import { ChallengeFilter, ChallengeFilterCategory, ChallengeFilterType } from "../challenge-filters";
+import { ChallengeFilter, ChallengeFilterCategory } from "../challenge-filters";
 
-import "./challenge-filter-category-grid.scss";
+import "./challenge-category-grid.scss";
 import ChallengeFilterBox from "./challenge-filter-box";
 import { Challenge } from "../challenges";
 
@@ -11,23 +11,21 @@ interface Props {
   setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>;
   onToggle: (category: ChallengeFilterCategory, selected: boolean, activeFilters: ChallengeFilter[], setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>) => void;
   changeFilter: (challengeFilter: ChallengeFilter, checked: boolean, activeFilters: ChallengeFilter[], setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>) => void;
-  challengesFilteredT1?: Challenge[];
+  tier1FilterResults?: Challenge[];
 }
 
-export default function ChallengeFilterCategoryGrid({
+export default function ChallengeCategoryGrid({
   category,
   activeFilters,
   setActiveFilters,
   onToggle,
   changeFilter,
-  challengesFilteredT1,
+  tier1FilterResults,
 }: Props): React.JSX.Element {
   const allSelected = category.filters.every(
-    //(categoryFilter: ChallengeFilter) => categoryFilter.type === ChallengeFilterType.VisualGap || activeFilters.includes(categoryFilter)
     (categoryFilter: ChallengeFilter) => activeFilters.includes(categoryFilter)
   );
   const someSelected = category.filters.some(
-    //(categoryFilter: ChallengeFilter) => categoryFilter.type !== ChallengeFilterType.VisualGap && activeFilters.includes(categoryFilter)
     (categoryFilter: ChallengeFilter) => activeFilters.includes(categoryFilter)
   );
 
@@ -42,7 +40,7 @@ export default function ChallengeFilterCategoryGrid({
   return (
     <div
       key={category.name}
-      className="category-filter-grid"
+      className="category-grid"
     >
       <button
         className={`btn category-checkbox ${allSelected ? "selected" : someSelected ? "indeterminate" : ""}`}
@@ -56,7 +54,7 @@ export default function ChallengeFilterCategoryGrid({
           challengeFilter={challengeFilter}
           activeFilters={activeFilters}
           onToggle={onChildToggle}
-          challengesFilteredT1={challengesFilteredT1}
+          tier1FilterResults={tier1FilterResults}
         />
       ))}
     </div>

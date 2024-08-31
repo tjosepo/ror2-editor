@@ -3,7 +3,7 @@ import { Challenge, Character, DLCType, ItemRarity, UnlockType } from "./challen
 export interface ChallengeFilter {
   name: string;
   type: ChallengeFilterType;
-  target: any;
+  target: DLCType | Character | ItemRarity | undefined;
   icon: string;
 }
 
@@ -12,7 +12,6 @@ export enum ChallengeFilterType {
   Character,
   Artifact,
   DLCType,
-  //VisualGap, // Hacky hack
 }
 
 export interface ChallengeFilterCategory {
@@ -30,7 +29,6 @@ export const tier1FilterCategories: ChallengeFilterCategory[] = [
     { name: "Base Game", type: ChallengeFilterType.DLCType, target: DLCType.Base, icon: "dlcs/base" },
     { name: "DLC: Survivors of the Void", type: ChallengeFilterType.DLCType, target: DLCType.SurvivorsOfTheVoid, icon: "dlcs/void" },
     { name: "DLC: Seekers of the Storm", type: ChallengeFilterType.DLCType, target: DLCType.SeekersOfTheStorm, icon: "dlcs/storm" },
-    //{ name: "", type: ChallengeFilterType.VisualGap, target: undefined, icon: "" },
   ] },
 ];
 

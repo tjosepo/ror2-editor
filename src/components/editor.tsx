@@ -1,11 +1,10 @@
-import React, { useMemo, useState } from "react";
-import { Challenge, UnlockType, challenges } from "../challenges";
-import { ChallengeFilter, ChallengeFilterCategory, ChallengeFilterType, tier1FilterCategories, tier2FilterCategories, challengeFilters, filterChallenges } from "../challenge-filters";
+import React, { useState } from "react";
+import { Challenge, challenges } from "../challenges";
+import { ChallengeFilter, ChallengeFilterCategory, tier1FilterCategories, tier2FilterCategories, filterChallenges } from "../challenge-filters";
 import ChallengeBox from "./challenge-box";
-import ChallengeFilterBox from "./challenge-filter-box";
 import "./editor.scss";
 import Button from "./button";
-import ChallengeFilterCategoryGrid from "./challenge-filter-category-grid";
+import ChallengeCategoryGrid from "./challenge-category-grid";
 
 interface Props {
   savedata: XMLDocument;
@@ -278,7 +277,7 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
       </div>
       <div>
         {tier1FilterCategories.map((category: ChallengeFilterCategory) => (
-          <ChallengeFilterCategoryGrid
+          <ChallengeCategoryGrid
             key={category.name}
             category={category}
             activeFilters={activeT1Filters}
@@ -289,14 +288,14 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
         ))}
         <div className="category-divider" />
         {tier2FilterCategories.map((category: ChallengeFilterCategory) => (
-          <ChallengeFilterCategoryGrid
+          <ChallengeCategoryGrid
             key={category.name}
             category={category}
             activeFilters={activeT2Filters}
             setActiveFilters={setActiveT2Filters}
             onToggle={changeCategoryFilter}
             changeFilter={changeFilter}
-            challengesFilteredT1={challengesFilteredT1}
+            tier1FilterResults={challengesFilteredT1}
           />
         ))}
       </div>
