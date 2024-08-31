@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Challenge, UnlockType, challenges } from "../challenges";
-import { ChallengeFilter, ChallengeFilterCategory, ChallengeFilterType, tier1FilterCategories, tier2FilterCategories, challengeFilters } from "../challenge-filters";
+import { ChallengeFilter, ChallengeFilterCategory, ChallengeFilterType, tier1FilterCategories, tier2FilterCategories, challengeFilters, filterChallenges } from "../challenge-filters";
 import ChallengeBox from "./challenge-box";
 import ChallengeFilterBox from "./challenge-filter-box";
 import "./editor.scss";
@@ -217,51 +217,6 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
     );
   };
 
-  const filterChallenges = (challenges: Challenge[]): Challenge[] => {
-    // Filter tier 1 first
-    // See comment above `tier1FilterCategories` definition for more details as to why this is done like this.
-    if (activeT1Filters.length !== 0) {
-      challenges = challenges.filter(
-        (challenge: Challenge) => activeT1Filters.some(
-          (challengeFilter: ChallengeFilter) => {
-            switch (challengeFilter.type) {
-              case ChallengeFilterType.ItemRarity:
-                return challenge.unlockType === UnlockType.Item && challenge.rarity === challengeFilter.target;
-              case ChallengeFilterType.Character:
-                return (challenge.unlockType === UnlockType.Character || challenge.unlockType === UnlockType.Skill || challenge.unlockType === UnlockType.Skin) && challenge.character === challengeFilter.target;
-              case ChallengeFilterType.Artifact:
-                return challenge.unlockType === UnlockType.Artifact;
-              case ChallengeFilterType.DLCType:
-                return challenge.dlc === challengeFilter.target;
-            }
-          }
-        )
-      );
-    }
-
-    if (activeT2Filters.length !== 0) {
-      // TODO: Fix gross repetition
-      challenges = challenges.filter(
-        (challenge: Challenge) => activeT2Filters.some(
-          (challengeFilter: ChallengeFilter) => {
-            switch (challengeFilter.type) {
-              case ChallengeFilterType.ItemRarity:
-                return challenge.unlockType === UnlockType.Item && challenge.rarity === challengeFilter.target;
-              case ChallengeFilterType.Character:
-                return (challenge.unlockType === UnlockType.Character || challenge.unlockType === UnlockType.Skill || challenge.unlockType === UnlockType.Skin) && challenge.character === challengeFilter.target;
-              case ChallengeFilterType.Artifact:
-                return challenge.unlockType === UnlockType.Artifact;
-              case ChallengeFilterType.DLCType:
-                return challenge.dlc === challengeFilter.target;
-            }
-          }
-        )
-      );
-    }
-
-    return challenges;
-  };
-
   const changeCategoryFilter = (category: ChallengeFilterCategory, checked: boolean, activeFilters: ChallengeFilter[], setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>): void => {
     category.filters.forEach(
       (categoryFilter: ChallengeFilter) => changeFilter(categoryFilter, checked, activeFilters, setActiveFilters, true)
@@ -291,10 +246,10 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
     }
   };
 
-  const filteredChallenges = useMemo(
-    () => filterChallenges(challenges),
-    [challenges, activeT1Filters, activeT2Filters]
-  );
+  // Filter tier 1 first, then tier 2 2nd
+  // See comment above `tier1FilterCategories` definition for more details as to why this is done like this.
+  const challengesFilteredT1 = filterChallenges(challenges, activeT1Filters);
+  const filteredChallenges = filterChallenges(challengesFilteredT1, activeT2Filters);
 
   return (
     <div>
@@ -341,6 +296,7 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
             setActiveFilters={setActiveT2Filters}
             onToggle={changeCategoryFilter}
             changeFilter={changeFilter}
+            challengesFilteredT1={challengesFilteredT1}
           />
         ))}
       </div>

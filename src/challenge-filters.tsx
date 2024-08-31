@@ -1,4 +1,4 @@
-import { Character, DLCType, ItemRarity } from "./challenges";
+import { Challenge, Character, DLCType, ItemRarity, UnlockType } from "./challenges";
 
 export interface ChallengeFilter {
   name: string;
@@ -77,3 +77,27 @@ export const challengeFilters: ChallengeFilter[] = [
   ...tier1FilterCategories.map((category: ChallengeFilterCategory) => category.filters),
   ...tier2FilterCategories.map((category: ChallengeFilterCategory) => category.filters)
 ].flat();
+
+export const filterChallenges = (challenges: Challenge[], filters: ChallengeFilter[]): Challenge[] => {
+  if (filters.length !== 0) {
+    challenges = challenges.filter(
+      (challenge: Challenge) => filters.some(
+        (challengeFilter: ChallengeFilter) => {
+          switch (challengeFilter.type) {
+            case ChallengeFilterType.ItemRarity:
+              return challenge.unlockType === UnlockType.Item && challenge.rarity === challengeFilter.target;
+            case ChallengeFilterType.Character:
+              return (challenge.unlockType === UnlockType.Character || challenge.unlockType === UnlockType.Skill || challenge.unlockType === UnlockType.Skin) && challenge.character === challengeFilter.target;
+            case ChallengeFilterType.Artifact:
+              return challenge.unlockType === UnlockType.Artifact;
+            case ChallengeFilterType.DLCType:
+              return challenge.dlc === challengeFilter.target;
+          }
+        }
+      )
+    );
+  }
+
+  return challenges;
+};
+

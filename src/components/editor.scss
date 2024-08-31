@@ -46,6 +46,7 @@
 }
 
 .btn {
+  cursor: pointer;
   position: relative;
   padding: 0;
   margin: 0;
@@ -60,20 +61,20 @@
     outline: 0;
   }
 
-  &.selected {
+  &:not(.disabled).selected {
     background-color: #6c5b33;
     border-color: #6c5b33;
     outline: #e2e15e 1px solid;
     outline-offset: -3px;
   }
 
-  &.indeterminate {
+  &:not(.disabled).indeterminate {
     border-color: #6c5b33;
     outline: #e2e15e 1px solid;
     outline-offset: -3px;
   }
 
-  &:hover {
+  &:not(.disabled):hover {
     &::after {
       content: "";
       pointer-events: none;
@@ -88,7 +89,6 @@
 
     &::before {
       content: "";
-      cursor: pointer;
       position: absolute;
       top: -8px;
       left: -8px;
@@ -111,6 +111,21 @@
           right: -8px;
         }
       }
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      bottom: -2px;
+      right: -2px;
+      background-color: black;
+      opacity: 0.8;
     }
   }
 }
