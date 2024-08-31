@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Challenge, challenges } from "../challenges";
-import { ChallengeFilter, ChallengeFilterCategory, tier1FilterCategories, tier2FilterCategories, filterChallenges } from "../challenge-filters";
+import {
+  ChallengeFilter,
+  ChallengeFilterCategory,
+  tier1FilterCategories,
+  tier2FilterCategories,
+  filterChallenges,
+} from "../challenge-filters";
 import ChallengeBox from "./challenge-box";
 import "./editor.scss";
 import Button from "./button";
@@ -18,8 +24,12 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
     savedata.querySelector("achievementsList")!.innerHTML.split(" "),
   );
 
-  const [activeT1Filters, setActiveT1Filters] = useState([] as ChallengeFilter[]);
-  const [activeT2Filters, setActiveT2Filters] = useState([] as ChallengeFilter[]);
+  const [activeT1Filters, setActiveT1Filters] = useState(
+    [] as ChallengeFilter[],
+  );
+  const [activeT2Filters, setActiveT2Filters] = useState(
+    [] as ChallengeFilter[],
+  );
 
   const changeCoins = (value: string): void => {
     savedata.querySelector("coins")!.innerHTML = value;
@@ -211,19 +221,34 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
   };
 
   const unlockAll = (): void => {
-    challenges.forEach(
-      (challenge) => changeChallenge(challenge, true)
-    );
+    challenges.forEach((challenge) => changeChallenge(challenge, true));
   };
 
-  const changeCategoryFilter = (category: ChallengeFilterCategory, checked: boolean, activeFilters: ChallengeFilter[], setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>): void => {
-    category.filters.forEach(
-      (categoryFilter: ChallengeFilter) => changeFilter(categoryFilter, checked, activeFilters, setActiveFilters, true)
+  const changeCategoryFilter = (
+    category: ChallengeFilterCategory,
+    checked: boolean,
+    activeFilters: ChallengeFilter[],
+    setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>,
+  ): void => {
+    category.filters.forEach((categoryFilter: ChallengeFilter) =>
+      changeFilter(
+        categoryFilter,
+        checked,
+        activeFilters,
+        setActiveFilters,
+        true,
+      ),
     );
     setActiveFilters([...activeFilters]);
   };
 
-  const changeFilter = (challengeFilter: ChallengeFilter, checked: boolean, activeFilters: ChallengeFilter[], setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>, skipSettingState: boolean = false): void => {
+  const changeFilter = (
+    challengeFilter: ChallengeFilter,
+    checked: boolean,
+    activeFilters: ChallengeFilter[],
+    setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>,
+    skipSettingState: boolean = false,
+  ): void => {
     if (checked) {
       if (activeFilters.includes(challengeFilter)) {
         return;
@@ -248,7 +273,10 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
   // Filter tier 1 first, then tier 2 2nd
   // See comment above `tier1FilterCategories` definition for more details as to why this is done like this.
   const challengesFilteredT1 = filterChallenges(challenges, activeT1Filters);
-  const filteredChallenges = filterChallenges(challengesFilteredT1, activeT2Filters);
+  const filteredChallenges = filterChallenges(
+    challengesFilteredT1,
+    activeT2Filters,
+  );
 
   return (
     <div>
@@ -301,9 +329,9 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
       </div>
 
       <div className="challenge-grid">
-        {filteredChallenges.length === 0 ?
+        {filteredChallenges.length === 0 ? (
           <i>No challenges match your filters</i>
-        :
+        ) : (
           filteredChallenges.map((challenge) => (
             <ChallengeBox
               key={challenge.achievement}
@@ -312,7 +340,7 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
               onToggle={changeChallenge}
             />
           ))
-        }
+        )}
       </div>
     </div>
   );

@@ -18,7 +18,10 @@ export default function ChallengeFilterBox({
   tier1FilterResults,
 }: Props): React.JSX.Element {
   const selected = activeFilters.includes(challengeFilter);
-  const disabled = tier1FilterResults && !selected && filterChallenges(tier1FilterResults, [challengeFilter]).length === 0;
+  const disabled =
+    tier1FilterResults &&
+    !selected &&
+    filterChallenges(tier1FilterResults, [challengeFilter]).length === 0;
 
   const handleToggle = (): void => {
     if (disabled) {
