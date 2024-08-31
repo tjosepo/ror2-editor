@@ -7,13 +7,15 @@ import ChallengeFilterBox from "./challenge-filter-box";
 interface Props {
   category: ChallengeFilterCategory;
   activeFilters: ChallengeFilter[];
-  onToggle: (category: ChallengeFilterCategory, selected: boolean) => void;
-  changeFilter: (challengeFilter: ChallengeFilter, checked: boolean) => void;
+  setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>;
+  onToggle: (category: ChallengeFilterCategory, selected: boolean, activeFilters: ChallengeFilter[], setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>) => void;
+  changeFilter: (challengeFilter: ChallengeFilter, checked: boolean, activeFilters: ChallengeFilter[], setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>) => void;
 }
 
 export default function ChallengeFilterCategoryGrid({
   category,
   activeFilters,
+  setActiveFilters,
   onToggle,
   changeFilter,
 }: Props): React.JSX.Element {
@@ -27,16 +29,17 @@ export default function ChallengeFilterCategoryGrid({
   );
 
   const handleToggle = (): void => {
-    onToggle(category, !allSelected);
+    onToggle(category, !allSelected, activeFilters, setActiveFilters);
+  };
+
+  const onChildToggle = (challengeFilter: ChallengeFilter, selected: boolean): void => {
+    changeFilter(challengeFilter, selected, activeFilters, setActiveFilters);
   };
 
   return (
     <div
       key={category.name}
       className="category-filter-grid"
-      style={{
-        marginBottom: "8px",
-      }}
     >
       <button
         className={`btn category-checkbox ${allSelected ? "selected" : someSelected ? "indeterminate" : ""}`}
@@ -49,7 +52,7 @@ export default function ChallengeFilterCategoryGrid({
           key={challengeFilter.name}
           challengeFilter={challengeFilter}
           activeFilters={activeFilters}
-          onToggle={changeFilter}
+          onToggle={onChildToggle}
         />
       ))}
     </div>

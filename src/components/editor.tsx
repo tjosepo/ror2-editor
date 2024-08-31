@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Challenge, UnlockType, challenges } from "../challenges";
-import { ChallengeFilter, ChallengeFilterCategory, ChallengeFilterType, challengeFilterCategories, challengeFilters } from "../challenge-filters";
+import { ChallengeFilter, ChallengeFilterCategory, ChallengeFilterType, tier1FilterCategories, tier2FilterCategories, challengeFilters } from "../challenge-filters";
 import ChallengeBox from "./challenge-box";
 import ChallengeFilterBox from "./challenge-filter-box";
 import "./editor.scss";
@@ -19,7 +19,8 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
     savedata.querySelector("achievementsList")!.innerHTML.split(" "),
   );
 
-  const [activeFilters, setActiveFilters] = useState([] as ChallengeFilter[]);
+  const [activeT1Filters, setActiveT1Filters] = useState([] as ChallengeFilter[]);
+  const [activeT2Filters, setActiveT2Filters] = useState([] as ChallengeFilter[]);
 
   const changeCoins = (value: string): void => {
     savedata.querySelector("coins")!.innerHTML = value;
@@ -217,11 +218,11 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
   };
 
   const filterChallenges = (challenges: Challenge[]): Challenge[] => {
-    if (activeFilters.length === 0) {
-      return challenges;
-    } else {
-      return challenges.filter(
-        (challenge: Challenge) => activeFilters.some(
+    // Filter tier 1 first
+    // See comment above `tier1FilterCategories` definition for more details as to why this is done like this.
+    if (activeT1Filters.length !== 0) {
+      challenges = challenges.filter(
+        (challenge: Challenge) => activeT1Filters.some(
           (challengeFilter: ChallengeFilter) => {
             switch (challengeFilter.type) {
               case ChallengeFilterType.ItemRarity:
@@ -232,23 +233,43 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
                 return challenge.unlockType === UnlockType.Artifact;
               case ChallengeFilterType.DLCType:
                 return challenge.dlc === challengeFilter.target;
-              /*case ChallengeFilterType.VisualGap:
-                return true;*/
             }
           }
         )
       );
     }
+
+    if (activeT2Filters.length !== 0) {
+      // TODO: Fix gross repetition
+      challenges = challenges.filter(
+        (challenge: Challenge) => activeT2Filters.some(
+          (challengeFilter: ChallengeFilter) => {
+            switch (challengeFilter.type) {
+              case ChallengeFilterType.ItemRarity:
+                return challenge.unlockType === UnlockType.Item && challenge.rarity === challengeFilter.target;
+              case ChallengeFilterType.Character:
+                return (challenge.unlockType === UnlockType.Character || challenge.unlockType === UnlockType.Skill || challenge.unlockType === UnlockType.Skin) && challenge.character === challengeFilter.target;
+              case ChallengeFilterType.Artifact:
+                return challenge.unlockType === UnlockType.Artifact;
+              case ChallengeFilterType.DLCType:
+                return challenge.dlc === challengeFilter.target;
+            }
+          }
+        )
+      );
+    }
+
+    return challenges;
   };
 
-  const changeCategoryFilter = (category: ChallengeFilterCategory, checked: boolean): void => {
+  const changeCategoryFilter = (category: ChallengeFilterCategory, checked: boolean, activeFilters: ChallengeFilter[], setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>): void => {
     category.filters.forEach(
-      (categoryFilter: ChallengeFilter) => changeFilter(categoryFilter, checked, false)
+      (categoryFilter: ChallengeFilter) => changeFilter(categoryFilter, checked, activeFilters, setActiveFilters, true)
     );
     setActiveFilters([...activeFilters]);
   };
 
-  const changeFilter = (challengeFilter: ChallengeFilter, checked: boolean, skipSettingState: boolean = false): void => {
+  const changeFilter = (challengeFilter: ChallengeFilter, checked: boolean, activeFilters: ChallengeFilter[], setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>, skipSettingState: boolean = false): void => {
     if (checked) {
       if (activeFilters.includes(challengeFilter)) {
         return;
@@ -269,6 +290,11 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
       setActiveFilters([...activeFilters]);
     }
   };
+
+  const filteredChallenges = useMemo(
+    () => filterChallenges(challenges),
+    [challenges, activeT1Filters, activeT2Filters]
+  );
 
   return (
     <div>
@@ -296,11 +322,23 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
         <Button onClick={unlockAll}>Unlock all</Button>
       </div>
       <div>
-        {challengeFilterCategories.map((category: ChallengeFilterCategory) => (
+        {tier1FilterCategories.map((category: ChallengeFilterCategory) => (
           <ChallengeFilterCategoryGrid
             key={category.name}
             category={category}
-            activeFilters={activeFilters}
+            activeFilters={activeT1Filters}
+            setActiveFilters={setActiveT1Filters}
+            onToggle={changeCategoryFilter}
+            changeFilter={changeFilter}
+          />
+        ))}
+        <div className="category-divider" />
+        {tier2FilterCategories.map((category: ChallengeFilterCategory) => (
+          <ChallengeFilterCategoryGrid
+            key={category.name}
+            category={category}
+            activeFilters={activeT2Filters}
+            setActiveFilters={setActiveT2Filters}
             onToggle={changeCategoryFilter}
             changeFilter={changeFilter}
           />
@@ -308,14 +346,18 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
       </div>
 
       <div className="challenge-grid">
-        {filterChallenges(challenges).map((challenge) => (
-          <ChallengeBox
-            key={challenge.achievement}
-            challenge={challenge}
-            achievements={achievements}
-            onToggle={changeChallenge}
-          />
-        ))}
+        {filteredChallenges.length === 0 ?
+          <i>No challenges match your filters</i>
+        :
+          filteredChallenges.map((challenge) => (
+            <ChallengeBox
+              key={challenge.achievement}
+              challenge={challenge}
+              achievements={achievements}
+              onToggle={changeChallenge}
+            />
+          ))
+        }
       </div>
     </div>
   );

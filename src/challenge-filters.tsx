@@ -20,7 +20,22 @@ export interface ChallengeFilterCategory {
   filters: ChallengeFilter[];
 }
 
-export const challengeFilterCategories: ChallengeFilterCategory[] = [
+/* Tier 1 filters apply BEFORE tier 2.
+ * Previously attempting to filter for Greens and SOTS would show ALL SOTS challenges and ALL Greens.
+ * Splitting these up allows us to filter for all Greens added by SOTS.
+ */
+export const tier1FilterCategories: ChallengeFilterCategory[] = [
+  /* DLCs. */
+  { name: "Releases", filters: [
+    { name: "Base Game", type: ChallengeFilterType.DLCType, target: DLCType.Base, icon: "dlcs/base" },
+    { name: "DLC: Survivors of the Void", type: ChallengeFilterType.DLCType, target: DLCType.SurvivorsOfTheVoid, icon: "dlcs/void" },
+    { name: "DLC: Seekers of the Storm", type: ChallengeFilterType.DLCType, target: DLCType.SeekersOfTheStorm, icon: "dlcs/storm" },
+    //{ name: "", type: ChallengeFilterType.VisualGap, target: undefined, icon: "" },
+  ] },
+];
+
+// Tier 2 filters apply AFTER tier 1. See comment on `tier1FilterCategories` for more details.
+export const tier2FilterCategories: ChallengeFilterCategory[] = [
   /* Characters */
   { name: "Characters", filters: [
     { name: "Commando", type: ChallengeFilterType.Character, target: Character.Commando, icon: "characters/commando-alt" },
@@ -56,14 +71,9 @@ export const challengeFilterCategories: ChallengeFilterCategory[] = [
   {name: "Artifacts", filters: [
     { name: "Artifacts", type: ChallengeFilterType.Artifact, target: undefined, icon: "artifacts/command" },
   ]},
-
-  /* DLCs. */
-  { name: "Releases", filters: [
-    { name: "Base Game", type: ChallengeFilterType.DLCType, target: DLCType.Base, icon: "dlcs/base" },
-    { name: "DLC: Survivors of the Void", type: ChallengeFilterType.DLCType, target: DLCType.SurvivorsOfTheVoid, icon: "dlcs/void" },
-    { name: "DLC: Seekers of the Storm", type: ChallengeFilterType.DLCType, target: DLCType.SeekersOfTheStorm, icon: "dlcs/storm" },
-    //{ name: "", type: ChallengeFilterType.VisualGap, target: undefined, icon: "" },
-  ] },
 ];
 
-export const challengeFilters: ChallengeFilter[] = challengeFilterCategories.map((category: ChallengeFilterCategory) => category.filters).flat();
+export const challengeFilters: ChallengeFilter[] = [
+  ...tier1FilterCategories.map((category: ChallengeFilterCategory) => category.filters),
+  ...tier2FilterCategories.map((category: ChallengeFilterCategory) => category.filters)
+].flat();
