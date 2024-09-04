@@ -23,7 +23,7 @@ export default function ChallengeBox({
   return (
     <button
       type="button"
-      className={`grid ${selected ? "selected" : ""}`}
+      className={`grid btn ${selected ? "selected" : ""}`}
       onClick={handleToggle}
     >
       <div className="icon">

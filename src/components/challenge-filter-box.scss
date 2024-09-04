@@ -1,0 +1,16 @@
+.filter-grid {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+
+  &.hidden {
+    visibility: hidden;
+  }
+
+  .filter-icon {
+    margin: -2px;
+
+    img {
+      width: 100%;
+    }
+  }
+}

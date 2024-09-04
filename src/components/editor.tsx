@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { Challenge, challenges } from "../challenges";
+import {
+  ChallengeFilter,
+  ChallengeFilterCategory,
+  tier1FilterCategories,
+  tier2FilterCategories,
+  filterChallenges,
+} from "../challenge-filters";
 import ChallengeBox from "./challenge-box";
 import "./editor.scss";
 import Button from "./button";
+import ChallengeCategoryGrid from "./challenge-category-grid";
 
 interface Props {
   savedata: XMLDocument;
@@ -15,6 +23,9 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
   const [achievements, setAchievements] = useState(
     savedata.querySelector("achievementsList")!.innerHTML.split(" "),
   );
+
+  const [activeT1Filters, setActiveT1Filters] = useState<ChallengeFilter[]>([]);
+  const [activeT2Filters, setActiveT2Filters] = useState<ChallengeFilter[]>([]);
 
   const changeCoins = (value: string): void => {
     savedata.querySelector("coins")!.innerHTML = value;
@@ -209,6 +220,39 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
     challenges.forEach((challenge) => changeChallenge(challenge, true));
   };
 
+  const changeFilter = (
+    challengeFilter: ChallengeFilter,
+    checked: boolean,
+    activeFilters: ChallengeFilter[],
+    setActiveFilters: React.Dispatch<React.SetStateAction<ChallengeFilter[]>>,
+  ): void => {
+    if (checked) {
+      if (activeFilters.includes(challengeFilter)) {
+        return;
+      }
+
+      activeFilters.push(challengeFilter);
+    } else {
+      const filterIndex = activeFilters.indexOf(challengeFilter);
+
+      if (filterIndex === -1) {
+        return;
+      }
+
+      activeFilters.splice(filterIndex, 1);
+    }
+
+    setActiveFilters([...activeFilters]);
+  };
+
+  // Filter tier 1 first, then tier 2 2nd
+  // See comment above `tier1FilterCategories` definition for more details as to why this is done like this.
+  const challengesFilteredT1 = filterChallenges(challenges, activeT1Filters);
+  const filteredChallenges = filterChallenges(
+    challengesFilteredT1,
+    activeT2Filters,
+  );
+
   return (
     <div>
       <div className="form-group row">
@@ -229,22 +273,47 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          marginBottom: "1rem",
         }}
       >
         <h2>Challenge</h2>
         <Button onClick={unlockAll}>Unlock all</Button>
       </div>
-
-      <div className="challenge-grid">
-        {challenges.map((challenge) => (
-          <ChallengeBox
-            key={challenge.achievement}
-            challenge={challenge}
-            achievements={achievements}
-            onToggle={changeChallenge}
+      <div>
+        {tier1FilterCategories.map((category: ChallengeFilterCategory) => (
+          <ChallengeCategoryGrid
+            key={category.name}
+            category={category}
+            activeFilters={activeT1Filters}
+            setActiveFilters={setActiveT1Filters}
+            changeFilter={changeFilter}
           />
         ))}
+        <div className="category-divider" />
+        {tier2FilterCategories.map((category: ChallengeFilterCategory) => (
+          <ChallengeCategoryGrid
+            key={category.name}
+            category={category}
+            activeFilters={activeT2Filters}
+            setActiveFilters={setActiveT2Filters}
+            changeFilter={changeFilter}
+            tier1FilterResults={challengesFilteredT1}
+          />
+        ))}
+      </div>
+
+      <div className="challenge-grid">
+        {filteredChallenges.length === 0 ? (
+          <i>No challenges match your filters</i>
+        ) : (
+          filteredChallenges.map((challenge) => (
+            <ChallengeBox
+              key={challenge.achievement}
+              challenge={challenge}
+              achievements={achievements}
+              onToggle={changeChallenge}
+            />
+          ))
+        )}
       </div>
     </div>
   );
