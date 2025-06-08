@@ -17,7 +17,8 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
   );
 
   const changeCoins = (value: string): void => {
-    savedata.querySelector("coins")!.innerHTML = value;
+    const clamped = Math.min(Math.max(parseInt(value), 0), 2147483647);
+    if (!isNaN(clamped)) savedata.querySelector("coins")!.innerHTML = clamped.toString();
   };
 
   const changeChallenge = (challenge: Challenge, checked: boolean): void => {
@@ -221,6 +222,7 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
           id="coins"
           defaultValue={coins}
           min="0"
+          max="2147483647"
           onChange={(e) => changeCoins(e.target.value)}
         />
       </div>
