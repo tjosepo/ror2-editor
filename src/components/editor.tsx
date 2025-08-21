@@ -10,6 +10,7 @@ interface Props {
 
 export default function Editor({ savedata }: Props): React.JSX.Element {
   const coins = savedata.querySelector("coins")!.innerHTML;
+  const name = savedata.querySelector("name")!.innerHTML;
   const stats = savedata.querySelector("stats")!;
 
   const [achievements, setAchievements] = useState(
@@ -18,6 +19,10 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
 
   const changeCoins = (value: string): void => {
     savedata.querySelector("coins")!.innerHTML = value;
+  };
+
+  const changeName = (value: string): void => {
+    savedata.querySelector("name")!.innerHTML = value;
   };
 
   const changeChallenge = (challenge: Challenge, checked: boolean): void => {
@@ -211,6 +216,19 @@ export default function Editor({ savedata }: Props): React.JSX.Element {
 
   return (
     <div>
+      <div className="form-group row">
+        <label htmlFor="name" className="label">
+          Profile Name
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          id="name"
+          defaultValue={name}
+          onChange={(e) => changeName(e.target.value)}
+        />
+      </div>
+
       <div className="form-group row">
         <label htmlFor="coins" className="label">
           Lunar Coins
