@@ -161,6 +161,7 @@ export const challenges: Challenge[] = [
 
   /* Seeker skills */
   { name: 'Seeker: Airborne Souls', description: 'As Seeker, hit three or more airborne enemies with a single use of the exploding third hit of Spirit Punch.', unlocks: ['Skills.Seeker.SoulSearch'], achievement: 'SeekerAirMultiHit', icon: 'skills/seeker/soulsearch' },
+  { name: 'Seeker: Clear Mind', description: 'As Seeker, meditate 20 times without missing an input in a single run.', unlocks: ['Skills.Seeker.PalmBlast'], achievement: 'SeekerPerfect20Meditation', icon: 'skills/seeker/palmblast' },
   { name: 'Seeker: Mastery', description: 'As Seeker, beat the game or obliterate on Monsoon.', unlocks: ['Skins.Seeker.Alt1'], achievement: 'SeekerClearGameMonsoon', icon: 'skins/seeker/alt1' },
 
   /* Chef skills */
