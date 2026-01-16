@@ -1,5 +1,5 @@
 import React from "react";
-import { Challenge } from "../challenges";
+import { Challenge } from "../data/types";
 
 import "./challenge-box.scss";
 
@@ -27,16 +27,11 @@ export default function ChallengeBox({
       onClick={handleToggle}
     >
       <div className="icon">
-        <picture>
-          <source
-            type="image/webp"
-            srcSet={`/images/webp/${challenge.icon}.webp`}
-          />
-          <img
-            src={`/images/png/${challenge.icon}.png`}
-            alt={`${challenge.name} icon`}
-          />
-        </picture>
+        <img
+          src={challenge.image}
+          alt={`${challenge.name} icon`}
+          loading="lazy"
+        />
       </div>
       <div className="text">
         <p className="name">{challenge.name}</p>

@@ -4,7 +4,7 @@ import sample from "../sample-save";
 
 interface Props {
   onFilenameChange: React.Dispatch<string>;
-  onSavedataChange: React.Dispatch<XMLDocument>;
+  onSavedataChange: (data: string) => void;
   style?: React.CSSProperties;
 }
 
@@ -33,11 +33,8 @@ export default function SaveImport({
   };
 
   const handleImportSample = (): void => {
-    const parser = new DOMParser();
-    const savedata = parser.parseFromString(sample, "text/xml") as XMLDocument;
-    console.log(savedata);
     onFilenameChange("sample.xml");
-    onSavedataChange(savedata);
+    onSavedataChange(sample);
   };
 
   return (
@@ -64,17 +61,12 @@ export default function SaveImport({
 
 const getSavedata = (
   savefile: File,
-  callback: (saveData: XMLDocument) => void,
+  callback: (data: string) => void,
 ): void => {
   const reader = new FileReader();
   reader.addEventListener("load", () => {
-    const parser = new DOMParser();
     const savedataAsString = reader.result as string;
-    const savedata = parser.parseFromString(
-      savedataAsString,
-      "text/xml",
-    ) as XMLDocument;
-    callback(savedata);
+    callback(savedataAsString);
   });
   reader.readAsText(savefile);
 };
